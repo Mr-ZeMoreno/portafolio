@@ -2,51 +2,265 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Josecarlos Vidal">
-  <div class="black-paper">
-    <h3 class="texto correo">hola@mr-zemoreno.dev</h3>
-    <h1 class="texto title">MR-ZEMORENO</h1>
+<script>
+  import hljs from "highlight.js";
+  import "highlight.js/styles/default.css"; // Importa el estilo que prefieras
+
+  // Obtén el código HTML como string
+  const htmlCode = document.querySelector("html").innerHTML;
+
+  const language = "html"; // Language for highlighting
+  const ignoreIllegals = true;
+
+  // Highlight the code using the new API
+  const highlightedHtml = hljs.highlight(htmlCode, {
+    language,
+    ignoreIllegals,
+  }).value;
+
+  // Inserta el HTML resaltado en el documento
+  document.querySelector(".codigo-html").innerHTML = highlightedHtml;
+</script>
+
+<Layout title="Mr-ZeMoreno">
+  <div class="codigo">
+    <pre>
+      <code class="codigo-html" />
+    </pre>
+    <p class="codigo-css"></p>
   </div>
+  <div class="black-paper">
+    <h3 class="correo">
+      <a href="mailto:hola@mr-zemoreno.dev">hola@mr-zemoreno.dev</a>
+    </h3>
+    <h1 class="title">MR-ZEMORENO</h1>
+    <div class="about-me">
+      <div class="image"><p class="vertical">「私は誰ですか？」</p></div>
+      <p class="status">connected<span class="parpadeo-texto">.</span></p>
+      <div class="consola">
+        <div class="input-msg"><span>></span><input type="text" /></div>
+
+        <div class="msg-block usuario-r">
+          <p class="usuario">Mr-zemoreno</p>
+          <p class="mensaje">
+            <span> > </span>Hola como estás?
+          </p>
+        </div>
+        <div class="msg-block usuario-l">
+          <p class="usuario">Mr-zemoreno</p>
+          <p class="mensaje">
+            <span> > </span>Hola como estás?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    body,
+    .black-paper {
+      background-color: #262626cc;
+      background-image: url("/img/black-texture.webp");
+      background-repeat: repeat;
+      background-size: 25%;
+    }
+
+    .black-paper {
+      height: 100dvh;
+      width: 600px;
+      box-shadow: 7px 7px 20px 1px rgba(0, 0, 0, 1);
+      border-radius: 20px;
+      color: #d2cdce;
+      padding: 28px;
+      padding-top: 30px;
+      z-index: 2;
+    }
+    .codigo {
+      height: 100dvh;
+      width: 100dvw;
+      position: fixed;
+      background-color: transparent;
+      z-index: 1;
+    }
+    .codigo-html {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      font-weight: normal;
+
+      .hljs-name {
+        color: #215da8;
+        font-weight: normal;
+      }
+
+      .hljs-attr {
+        color: #0d87d3;
+      }
+
+      .hljs-string {
+        color: #b47b27;
+      }
+    }
+    .video {
+      height: 80%;
+    }
+    @font-face {
+      font-family: "Archivo Black";
+      src: url("/fonts/ArchivoBlack-Regular.woff2") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .title,
+    .correo,
+    .vertical {
+      font-family: "Archivo Black", sans-serif;
+    }
+    .title {
+      letter-spacing: -3px;
+      display: inline-block;
+      transform: scaleY(1.2);
+      font-size: 67px;
+      text-align: center;
+      line-height: 1;
+    }
+    .correo {
+      text-align: right;
+      font-size: 20px;
+      transition: ease-in 0.1s;
+      margin-right: 10px;
+    }
+    .correo:hover {
+      transform: scale(1.02);
+    }
+    .about-me {
+      height: 350px;
+      width: 100%;
+      display: grid;
+      grid-template-areas: "image status" "image consola";
+      grid-template-rows: 40px auto;
+      grid-template-columns: 60% auto;
+      column-gap: 10px;
+      row-gap: 5px;
+    }
+    .image {
+      height: 100%;
+      background-image: url("/img/chappie.jpg");
+      background-position-y: -10px;
+      background-size: 100%;
+      grid-area: image;
+    }
+    @keyframes parpadeo-texto {
+      50% {
+        opacity: 0.3;
+      }
+    }
+    .parpadeo-texto {
+      animation: parpadeo-texto 2s ease-in-out infinite;
+    }
+    @font-face {
+      font-family: "Orbitron";
+      src: url("/fonts/Orbitron-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    .consola,
+    .status,
+    .input-msg {
+      font-family: "Orbitron";
+    }
+    .input-msg {
+      display: flex;
+      flex-direction: row;
+      color: #25cc54;
+      input {
+        background: transparent;
+        border: 0;
+        outline: none;
+        padding-left: 5px;
+        font-size: 12px;
+        color: white;
+      }
+    }
+    .consola {
+      grid-area: consola;
+      background-color: rgba(0, 0, 0, 0.161);
+      display: flex;
+      flex-direction: column-reverse;
+      padding: 10px;
+      padding-bottom: 5px;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .msg-box {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+      max-width: 80%;
+    }
+
+    .usuario-l {
+      align-self: flex-start;
+    }
+
+    .usuario-r {
+      align-self: flex-end;
+    }
+
+    .usuario {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .mensaje {
+      font-size: 12px;
+      margin: 0;
+      background-color: #333;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .status {
+      grid-area: status;
+      text-align: center;
+      background-color: #012807;
+      border: 4px solid transparent;
+      box-shadow: inset 0 0 0 2px #25cc5484;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 20px;
+      color: white;
+      background-image: repeating-linear-gradient(
+          180deg,
+          transparent,
+          transparent 8px,
+          #25cc5410 10px,
+          #25cc5410 12px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 8px,
+          #25cc5410 10px,
+          #25cc5410 12px
+        );
+    }
+    .vertical {
+      margin-top: 10px;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 25px;
+      font-weight: 500;
+    }
+  </style>
 </Layout>
-
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
-
-  body {
-    background-color: #262626cc;
-
-    background-image: url("/img/black-texture.webp");
-
-    background-repeat: repeat; /* Ambas imágenes se repiten */
-    background-size: 20%; /* Tamaño personalizado para cada imagen */
-
-    display: flex;
-    justify-content: center;
-  }
-  .black-paper {
-    height: 100dvh;
-    width: 600px;
-
-    border: 5px solid #4a4a4acc;
-
-    color: #eca4b7;
-
-    padding: 25px;
-    padding-top: 30px;
-  }
-  .texto {
-    font-family: "Archivo Black", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  .title {
-    letter-spacing: -3px;
-    display: inline-block;
-    transform: scaleY(1.2);
-    font-size: 67px;
-    text-align: center;
-  }
-  .correo {
-    text-align: right;
-  }
-</style>
