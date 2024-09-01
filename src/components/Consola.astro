@@ -7,42 +7,44 @@ const { gridArea } = Astro.props;
 ---
 
 <script>
+    import { Console } from "../js/commandConsole";
+    import { $, $$, clases, dotClass } from "../js/utils";
+
     document.addEventListener("DOMContentLoaded", () => {
-        document
-            .getElementById("input-form")
-            ?.addEventListener("submit", function (event) {
-                event.preventDefault();
+        $("#input-form")?.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-                const inputElement = document.getElementById(
-                    "input-msg",
-                ) as HTMLInputElement;
-                if (inputElement) {
-                    const inputValue = inputElement.value;
+            // Guardamos nuestro elemento $consola y instanciamos la clase consola
+            const $consola = $(dotClass(clases.CONSOLA));
+            const consola = new Console($consola);
 
-                    inputElement.value = "";
-                    console.log("Input Value:", inputValue);
+            // Guardamos el elemento $inputElement y si existe seguimos con el código
+            const $inputElement = $("#input-msg") as HTMLInputElement;
+            if ($inputElement) {
+                const inputValue = $inputElement.value;
+                consola.limpiarInput($inputElement);
 
-                    const consola = document.querySelector(".consola");
+                // Guardamos todos los elementos con clase INLINE (ver utils.ts) que esten en el elemento $consola
+                let $$inlineMsg = $$(dotClass(clases.INLINE), $consola);
+                let contador = $$inlineMsg.length + 1; // Aun no sé bien pero el contador comienza en cero por eso sumo 1
 
-                    if (inputValue.toLowerCase() == "clear") {
-                        consola.innerHTML = "";
-                        return;
-                    }
-
-                    const msgElement = document.querySelector(".msg");
-                    if (msgElement) {
-                        // Crear un nuevo párrafo
-                        const newParagraph = document.createElement("div"); // Usar div para contener HTML
-                        newParagraph.classList.add("inline-msg");
-                        // Establecer el contenido HTML del nuevo párrafo
-                        newParagraph.innerHTML = `<span class="green">></span><p> ${inputValue}</p>`;
-
-                        if (consola) {
-                            consola.appendChild(newParagraph);
-                        }
-                    }
+                const $msgElement = $(dotClass(clases.MSG));
+                if ($msgElement) {
+                    consola.appendChild(inputValue, clases.INLINE);
                 }
-            });
+
+                if (contador % 8 == 0 && contador > 0) {
+                    const $alertMsg = $$(dotClass(clases.ALERTA), $consola);
+                    consola.removeAllElements($alertMsg);
+                    consola.appendChild(
+                        "intenta usar el comando 'clear'",
+                        clases.ALERTA,
+                    );
+                }
+
+                consola.command($consola, inputValue);
+            }
+        });
     });
 </script>
 
@@ -50,22 +52,35 @@ const { gridArea } = Astro.props;
     <form id="input-form">
         <label>
             <span class="green">></span>
-            <input id="input-msg" type="text" />
+            <input
+                id="input-msg"
+                type="text"
+                name="linea de comandos"
+                autocomplete="off"
+            />
         </label>
     </form>
     <div class="consola msg"></div>
 </div>
 
 <style is:global>
-    .inline-msg {
+    .inline-msg,
+    .alerta-msg {
         display: flex;
         flex-direction: row;
         p {
             padding-left: 5px;
         }
     }
+    .alerta-msg > p {
+        margin: 0 auto;
+        text-align: center;
+    }
     .green {
         color: #25cc54;
+    }
+    .alerta-msg > .green {
+        display: none;
     }
 </style>
 

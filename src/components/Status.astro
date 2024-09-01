@@ -10,12 +10,15 @@ let { gridArea } = Astro.props;
 
 <style define:vars={{ gridArea }}>
     @keyframes parpadeo-texto {
-        50% {
-            opacity: 0.3;
+        60% {
+            opacity: 0;
         }
     }
     .parpadeo-texto {
-        animation: parpadeo-texto 2s ease-in-out infinite;
+        animation: parpadeo-texto 1s infinite;
+        padding-left: 3px;
+        font-family: "Archivo Black";
+        font-size: 15px;
     }
 
     .status {
