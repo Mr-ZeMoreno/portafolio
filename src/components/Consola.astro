@@ -3,6 +3,12 @@
     import { $, $$, clases, dotClass } from "../js/utils";
 
     document.addEventListener("DOMContentLoaded", () => {
+        const $inputElement = $("#input-msg") as HTMLInputElement;
+
+        $(".consola-box")?.addEventListener("click", () => {
+            $inputElement.focus();
+        });
+
         $("#input-form")?.addEventListener("submit", function (event) {
             event.preventDefault();
 
@@ -11,7 +17,6 @@
             const consola = new Console($consola);
 
             // Guardamos el elemento $inputElement y si existe seguimos con el código
-            const $inputElement = $("#input-msg") as HTMLInputElement;
             if ($inputElement) {
                 const inputValue = $inputElement.value;
                 consola.limpiarInput($inputElement);
