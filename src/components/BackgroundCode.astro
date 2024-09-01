@@ -1,0 +1,52 @@
+<script>
+  import hljs from "highlight.js";
+  import "highlight.js/styles/default.css";
+
+  const htmlCode = document.querySelector("html").innerHTML;
+
+  const language = "html";
+  const ignoreIllegals = true;
+
+  const highlightedHtml = hljs.highlight(htmlCode, {
+    language,
+    ignoreIllegals,
+  }).value;
+
+  document.querySelector(".codigo-html").innerHTML = highlightedHtml;
+</script>
+
+<pre class="codigo">
+    <code class="codigo-html" />
+</pre>
+
+<style>
+  .codigo {
+    height: 100dvh;
+    width: 100dvw;
+    position: fixed;
+    background-color: transparent;
+    z-index: 1;
+  }
+  .codigo-html {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-weight: normal;
+
+    .hljs-name {
+      color: #215da8;
+      font-weight: normal;
+    }
+
+    .hljs-attr {
+      color: #0d87d3;
+    }
+
+    .hljs-string {
+      color: #b47b27;
+    }
+    .hljs-attribute {
+      font-weight: normal;
+    }
+  }
+</style>

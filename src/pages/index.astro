@@ -1,48 +1,24 @@
 ---
+import BackgroundCode from "../components/BackgroundCode.astro";
+import Consola from "../components/Consola.astro";
+import Status from "../components/Status.astro";
+import VerticalText from "../components/VerticalText.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<script>
-  import hljs from "highlight.js";
-  import "highlight.js/styles/default.css"; // Importa el estilo que prefieras
-
-  // Obtén el código HTML como string
-  const htmlCode = document.querySelector("html").innerHTML;
-
-  const language = "html"; // Language for highlighting
-  const ignoreIllegals = true;
-
-  const highlightedHtml = hljs.highlight(htmlCode, {
-    language,
-    ignoreIllegals,
-  }).value;
-
-  document.querySelector(".codigo-html").innerHTML = highlightedHtml;
-
-  let $inputMsg = document.getElementById("input-form");
-
-  $inputMsg.addEventListener("submit", () => {
-    console.log("submit");
-  });
-</script>
-
 <Layout title="Mr-ZeMoreno">
-  <pre class="codigo">
-      <code class="codigo-html" />
-    </pre>
+  <BackgroundCode />
   <div class="black-paper">
     <h3 class="correo">
       <a href="mailto:hola@mr-zemoreno.dev">hola@mr-zemoreno.dev</a>
     </h3>
     <h1 class="title">MR-ZEMORENO</h1>
     <div class="about-me">
-      <div class="image"><p class="vertical">「私は誰ですか？」</p></div>
-      <p class="status">connected<span class="parpadeo-texto">.</span></p>
-      <div class="consola">
-        <form id="input-form">
-          <label>> <input type="text" /></label>
-        </form>
+      <div class="image">
+        <VerticalText>「私は誰ですか？」</VerticalText>
       </div>
+      <Status gridArea={"status"} />
+      <Consola gridArea={"consola"} />
     </div>
   </div>
 </Layout>
@@ -74,38 +50,7 @@ import Layout from "../layouts/Layout.astro";
     padding-top: 30px;
     z-index: 2;
   }
-  .codigo {
-    height: 100dvh;
-    width: 100dvw;
-    position: fixed;
-    background-color: transparent;
-    z-index: 1;
-  }
-  .codigo-html {
-    display: flex;
-    flex-direction: column;
-    color: white;
-    font-weight: normal;
 
-    .hljs-name {
-      color: #215da8;
-      font-weight: normal;
-    }
-
-    .hljs-attr {
-      color: #0d87d3;
-    }
-
-    .hljs-string {
-      color: #b47b27;
-    }
-    .hljs-attribute {
-      font-weight: normal;
-    }
-  }
-  .video {
-    height: 80%;
-  }
   @font-face {
     font-family: "Archivo Black";
     src: url("/fonts/ArchivoBlack-Regular.woff2") format("woff2");
@@ -115,8 +60,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .title,
-  .correo,
-  .vertical {
+  .correo {
     font-family: "Archivo Black", sans-serif;
   }
   .title {
@@ -153,90 +97,11 @@ import Layout from "../layouts/Layout.astro";
     background-size: 100%;
     grid-area: image;
   }
-  @keyframes parpadeo-texto {
-    50% {
-      opacity: 0.3;
-    }
-  }
-  .parpadeo-texto {
-    animation: parpadeo-texto 2s ease-in-out infinite;
-  }
 
   @font-face {
     font-family: "Orbitron";
     src: url("/fonts/Orbitron-Regular.ttf") format("truetype");
     font-display: swap;
     font-style: normal;
-  }
-
-  .consola,
-  .status,
-  #input-form {
-    font-family: "Orbitron";
-  }
-  #input-form {
-    color: #25cc54;
-    label {
-      display: flex;
-      flex-direction: row;
-      input {
-        background: transparent;
-        border: 0;
-        outline: none;
-        padding-left: 5px;
-        font-size: 12px;
-        color: white;
-      }
-    }
-  }
-  .consola {
-    grid-area: consola;
-    background-color: rgba(0, 0, 0, 0.161);
-    display: flex;
-    flex-direction: column-reverse;
-    padding: 10px;
-    padding-bottom: 5px;
-    height: 100%;
-    overflow-y: auto;
-  }
-
-  .msg-box {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    max-width: 80%;
-  }
-
-  .status {
-    grid-area: status;
-    text-align: center;
-    background-color: #012807;
-    border: 4px solid transparent;
-    box-shadow: inset 0 0 0 2px #25cc5484;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 20px;
-    color: white;
-    background-image: repeating-linear-gradient(
-        180deg,
-        transparent,
-        transparent 8px,
-        #25cc5410 10px,
-        #25cc5410 12px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 8px,
-        #25cc5410 10px,
-        #25cc5410 12px
-      );
-  }
-  .vertical {
-    margin-top: 10px;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    font-size: 25px;
-    font-weight: 500;
   }
 </style>

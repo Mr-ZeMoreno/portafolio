@@ -1,0 +1,47 @@
+---
+interface Props {
+    gridArea: string;
+}
+
+let { gridArea } = Astro.props;
+---
+
+<p class="status">connected<span class="parpadeo-texto">.</span></p>
+
+<style define:vars={{ gridArea }}>
+    @keyframes parpadeo-texto {
+        50% {
+            opacity: 0.3;
+        }
+    }
+    .parpadeo-texto {
+        animation: parpadeo-texto 2s ease-in-out infinite;
+    }
+
+    .status {
+        font-family: "Orbitron";
+        grid-area: var(--gridArea);
+        text-align: center;
+        background-color: #012807;
+        border: 4px solid transparent;
+        box-shadow: inset 0 0 0 2px #25cc5484;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 20px;
+        color: white;
+        background-image: repeating-linear-gradient(
+                180deg,
+                transparent,
+                transparent 8px,
+                #25cc5410 10px,
+                #25cc5410 12px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 8px,
+                #25cc5410 10px,
+                #25cc5410 12px
+            );
+    }
+</style>
