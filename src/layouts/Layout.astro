@@ -47,4 +47,19 @@ const { title } = Astro.props;
     <slot />
   </body>
 </html>
-<style is:global></style>
+<style is:global>
+  @font-face {
+    font-family: "Archivo Black";
+    src: url("/fonts/ArchivoBlack-Regular.woff2") format("woff2");
+    font-display: swap;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Orbitron";
+    src: url("/fonts/Orbitron-Regular.ttf") format("truetype");
+    font-display: swap;
+    font-style: normal;
+  }
+</style>
