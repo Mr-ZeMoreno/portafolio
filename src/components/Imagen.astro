@@ -23,7 +23,7 @@ import VerticalText from "./VerticalText.astro";
         }
         try {
             const response = await fetch(
-                "/api/get-file?fileName=01%20El%20Necio.m4a",
+                "api.mr-zemoreno.dev/get?fileName=01%20El%20Necio.m4a",
             );
             const json = await response.json();
             audioUrl = json.url || null;
