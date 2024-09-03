@@ -3,8 +3,9 @@ import BackgroundCode from "../components/BackgroundCode.astro";
 import Consola from "../components/Consola.astro";
 import CppCode from "../components/CppCode.astro";
 import Status from "../components/Status.astro";
-import Imagen from "../components/Imagen.astro";
+import Imagen from "../components/Imagen.jsx";
 import Layout from "../layouts/Layout.astro";
+import VerticalText from "../components/VerticalText.astro";
 ---
 
 <Layout title="Mr-ZeMoreno">
@@ -20,7 +21,9 @@ import Layout from "../layouts/Layout.astro";
       class="flex flex-col h-auto w-full
              md:grid md:grid-template-areas-md md:h-[350px]"
     >
-      <Imagen />
+      <Imagen client:load>
+        <VerticalText>「ロボットそれとも人間？」</VerticalText>
+      </Imagen>
       <Status gridArea={"status"} />
       <Consola />
     </div>

@@ -1,0 +1,38 @@
+.first-click {
+    transition: filter 5s;
+}
+
+@keyframes pulsacion {
+    40% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.01);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1.01);
+    }
+
+    65% {
+        transform: scale(1);
+    }
+}
+
+.invert-color {
+    filter: invert(100%);
+    animation: pulsacion 1.5s infinite;
+}
+
+.imagen {
+    height: 100%;
+    background-image: url("/src/img/chappie.webp");
+    background-position-y: -10px;
+    background-size: 100%;
+    grid-area: image;
+}
