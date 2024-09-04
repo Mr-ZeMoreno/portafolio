@@ -9,6 +9,6 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
-  output: 'hybrid',
+  output: 'server',
   adapter: vercel(),
 });

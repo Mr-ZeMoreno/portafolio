@@ -1,7 +1,3 @@
-.first-click {
-    transition: filter 5s;
-}
-
 @keyframes pulsacion {
     40% {
         transform: scale(1);
@@ -35,4 +31,5 @@
     background-position-y: -10px;
     background-size: 100%;
     grid-area: image;
+    transition: filter .5s ease-in;
 }
