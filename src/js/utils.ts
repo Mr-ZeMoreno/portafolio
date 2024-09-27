@@ -24,6 +24,6 @@ export const clases = {
     MSG: "msg",
     CONSOLA: "consola",
 };
-export const dotClass = (clase) => {
+export const dotClass = (clase: string) => {
     return "." + clase;
 };

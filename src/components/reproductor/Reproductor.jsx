@@ -1,21 +1,38 @@
 import { useState, useRef, useEffect } from 'react';
 import Thumbnail from './Thumbnail';
+import { Console } from '../../js/commandConsole';
+import { $,clases, dotClass } from "../../js/utils";
 
 const Reproductor = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [isEnd, setIsEnd] = useState(true);
     const audioRef = useRef(null);
+    const consoleRef = useRef(null);
+
+    useEffect(() => {
+        const $consola =$(dotClass(clases.CONSOLA));
+
+        consoleRef.current = new Console($consola);
+
+        const audio = audioRef.current;
+        if (audio) {
+            audio.addEventListener('timeupdate', handleTimeUpdate);
+            audio.addEventListener('ended', handleAudioEnd);
+        }
+        return () => {
+            if (audio) {
+                audio.removeEventListener('timeupdate', handleTimeUpdate);
+                audio.removeEventListener('ended', handleAudioEnd);
+            }
+        };
+    }, []);
 
     const handleThumbnailClick = () => {
-        setIsPlaying((prev) => !prev);
-        if (audioRef.current) {
-            if (!isPlaying) {
-                audioRef.current.play();
-                setIsEnd(false);
-            } else {
-                audioRef.current.pause();
-            }
+        if (!isPlaying) {
+            play();
+        } else {
+            pause();
         }
     };
 
@@ -28,21 +45,32 @@ const Reproductor = ({ children }) => {
     const handleAudioEnd = () => {
         setIsPlaying(false);
         setIsEnd(true);
+        consoleRef.current.appendChild("La canción ha terminado", "middle-msg");
     };
 
-    const audioUrl = 'music/01 Wait a Minute.mp3';
-    useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
-            audioRef.current.addEventListener('ended', handleAudioEnd);
+    const AudioAttributes = {
+        Name: "'Wait a Minute' de SnakeCity",
+        Url: "music/01 Wait a Minute.mp3"
+    };
+
+    const play = () => {
+        const audio = audioRef.current;
+        if (audio) {
+            audio.play();
+            setIsPlaying(true);
+            setIsEnd(false);
+            consoleRef.current.play(); // Llama al método play de la consola
         }
-        return () => {
-            if (audioRef.current) {
-                audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-                audioRef.current.removeEventListener('ended', handleAudioEnd);
-            }
-        };
-    }, []);
+    };
+
+    const pause = () => {
+        const audio = audioRef.current;
+        if (audio) {
+            audio.pause();
+            setIsPlaying(false);
+            consoleRef.current.pause(); // Llama al método pause de la consola
+        }
+    };
 
     return (
         <>
@@ -54,11 +82,12 @@ const Reproductor = ({ children }) => {
             >
                 {children}
             </Thumbnail>
-            {audioUrl && (
+            {AudioAttributes.Url && (
                 <audio
                     id="audio-rep"
+                    name={AudioAttributes.Name}
                     ref={audioRef}
-                    src={audioUrl}
+                    src={AudioAttributes.Url}
                     className="hidden"
                     preload="auto"
                 />
