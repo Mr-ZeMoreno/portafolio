@@ -49,7 +49,7 @@ const Reproductor = ({ children }) => {
             <Thumbnail
                 onClick={handleThumbnailClick}
                 isPlaying={isPlaying}
-                isEnd={isEnd}  // Pasar el estado isEnd al Thumbnail
+                isEnd={isEnd}
                 timer={currentTime.toFixed(0)}
             >
                 {children}

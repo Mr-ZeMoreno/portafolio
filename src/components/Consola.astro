@@ -1,6 +1,128 @@
 <script>
-  import { Console } from "../js/commandConsole.js";
   import { $, $$, clases, dotClass } from "../js/utils";
+
+  export class Console {
+    padre: HTMLElement;
+    comandos: { [key: string]: (inputValue: string) => void };
+
+    constructor(padre: HTMLElement) {
+      this.padre = padre;
+      this.comandos = {
+        hola: this.hola.bind(this),
+        clear: this.clear.bind(this),
+        play: this.play.bind(this),
+        pause: this.pause.bind(this),
+        help: this.help.bind(this),
+      };
+
+      this.setupAudioEvents();
+    }
+
+    setupAudioEvents() {
+      const $rep = document.querySelector("#audio-rep") as HTMLAudioElement;
+
+      if ($rep) {
+        $rep.addEventListener("ended", () => {
+          const $thumbnail = document.querySelector(".imagen") as HTMLElement;
+          $thumbnail.classList.remove("invert-color");
+          const $timer = $thumbnail.querySelector(
+            "span.ml-auto"
+          ) as HTMLElement;
+
+          if ($timer) {
+            $timer.classList.add("hidden");
+          }
+        });
+      }
+    }
+
+    appendChild(inputValue: string, clase: string) {
+      const $msgLine = document.createElement("div");
+      $msgLine.classList.add(clase);
+      $msgLine.innerHTML = `<span class="green">></span><p></p>`;
+
+      const $parrafo = $msgLine.querySelector("p");
+      if ($parrafo) {
+        $parrafo.textContent = inputValue;
+      }
+
+      if (this.padre) {
+        this.padre.appendChild($msgLine);
+      }
+    }
+
+    clear() {
+      this.padre.innerHTML = "";
+    }
+
+    hola() {
+      this.appendChild(
+        "Hola, Soy Josecarlos, también conocido como Zemoreno. " +
+          "Soy apasionado de la programación 👨🏽‍💻, el sushi 🍣 y la música soul 🎧. " +
+          "No dudes en contactarme a mi correo y disfruta de la canción de turno, " +
+          "la cual voy cambiando semanalmente.",
+        "middle-msg"
+      );
+      this.appendChild(".", "middle-msg");
+      this.appendChild(".", "middle-msg");
+      this.help();
+    }
+
+    help() {
+      const comandosList = Object.keys(this.comandos).map((comando) => {
+        return `${comando}`;
+      });
+
+      const helpMessage =
+        comandosList.length > 0
+          ? `Comandos disponibles: ${comandosList.join(", ")}`
+          : "No hay comandos disponibles.";
+
+      this.appendChild(helpMessage, "middle-msg");
+    }
+
+    play() {
+      this.appendChild("Reproduciendo", "middle-msg");
+      const $thumbnail = document.querySelector(".imagen") as HTMLElement;
+      const $timer = $thumbnail.querySelector("span.ml-auto") as HTMLElement;
+      const $rep = document.querySelector("#audio-rep") as HTMLAudioElement;
+
+      $thumbnail.classList.add("invert-color");
+      $timer.classList.remove("hidden");
+      $rep.play();
+    }
+
+    pause() {
+      this.appendChild("Pausado", "middle-msg");
+      const $thumbnail = document.querySelector(".imagen") as HTMLElement;
+      const $rep = document.querySelector("#audio-rep") as HTMLAudioElement;
+
+      $thumbnail.classList.remove("invert-color");
+      $rep.pause();
+    }
+
+    ejecutarComando(inputValue: string) {
+      const comando = inputValue.toLowerCase();
+      if (this.comandos[comando]) {
+        this.appendChild(inputValue, "inline-msg");
+        this.comandos[comando](inputValue);
+      } else {
+        this.appendChild(`Comando no reconocido: ${inputValue}`, "middle-msg");
+      }
+    }
+
+    removeAllElements(htmlElement: NodeListOf<Element>) {
+      if (htmlElement.length >= 0) {
+        htmlElement.forEach((elemento) => {
+          elemento.remove();
+        });
+      }
+    }
+
+    limpiarInput(htmlElement: HTMLInputElement) {
+      htmlElement.value = "";
+    }
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     const $inputElement = $("#input-msg") as HTMLInputElement;
@@ -12,6 +134,8 @@
     $("#input-form")?.addEventListener("submit", function (event) {
       event.preventDefault();
 
+      $inputElement.placeholder = "";
+
       const $consola = $(dotClass(clases.CONSOLA)) as HTMLElement;
       const consola = new Console($consola);
 
@@ -19,21 +143,16 @@
         const inputValue = $inputElement.value;
         consola.limpiarInput($inputElement);
 
-        let $$inlineMsg = $$(dotClass(clases.INLINE), $consola);
-        let contador = $$inlineMsg.length + 1; // Aun no sé bien pero el contador comienza en cero por eso sumo 1
+        consola.ejecutarComando(inputValue);
 
-        const $msgElement = $(dotClass(clases.MSG));
-        if ($msgElement) {
-          consola.appendChild(inputValue, clases.INLINE);
-        }
+        let $$inlineMsg = $$(dotClass(clases.INLINE), $consola);
+        let contador = $$inlineMsg.length + 1;
 
         if (contador % 8 == 0 && contador > 0) {
           const $alertMsg = $$(dotClass(clases.ALERTA), $consola);
           consola.removeAllElements($alertMsg);
           consola.appendChild("intenta usar el comando 'clear'", clases.ALERTA);
         }
-
-        consola.command($consola, inputValue);
       }
     });
   });
@@ -50,6 +169,7 @@
         type="text"
         name="linea de comandos"
         autocomplete="off"
+        placeholder='Intenta con "Hola"'
       />
     </label>
   </form>
@@ -58,21 +178,23 @@
 
 <style is:global>
   .inline-msg,
-  .alerta-msg {
+  .middle-msg {
     display: flex;
     flex-direction: row;
     p {
       padding-left: 5px;
     }
   }
-  .alerta-msg > p {
+  .middle-msg > p {
     margin: 0 auto;
     text-align: center;
+    letter-spacing: 0.23em;
+    font-size: 13px;
   }
   .green {
     color: #25cc54;
   }
-  .alerta-msg > .green {
+  .middle-msg > .green {
     display: none;
   }
 </style>
@@ -105,7 +227,6 @@
     padding-bottom: 5px;
   }
   .consola {
-    flex-direction: row;
     font-size: 12px;
   }
 </style>
