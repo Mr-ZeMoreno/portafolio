@@ -23,7 +23,8 @@
   }).value;
 
   document.addEventListener("DOMContentLoaded", () => {
-    $(".codigo-cpp").innerHTML = highlightedCpp;
+    const elemento = $(".codigo-cpp") as HTMLElement;
+    elemento.innerHTML = highlightedCpp;
   });
 </script>
 
@@ -32,14 +33,14 @@
 <style is:global>
   .hljs-type,
   .hljs-keyword {
-    color: #27907b;
+    color: #27907b !important;
   }
   .hljs-title,
   .hljs-built_in {
-    color: #ffff52;
-    font-weight: normal;
+    color: #ffff52 !important;
+    font-weight: normal !important;
   }
   .hljs-number {
-    color: greenyellow;
+    color: greenyellow !important;
   }
 </style>

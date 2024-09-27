@@ -12,16 +12,13 @@
     $("#input-form")?.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      // Guardamos nuestro elemento $consola y instanciamos la clase consola
       const $consola = $(dotClass(clases.CONSOLA)) as HTMLElement;
       const consola = new Console($consola);
 
-      // Guardamos el elemento $inputElement y si existe seguimos con el código
       if ($inputElement) {
         const inputValue = $inputElement.value;
         consola.limpiarInput($inputElement);
 
-        // Guardamos todos los elementos con clase INLINE (ver utils.ts) que esten en el elemento $consola
         let $$inlineMsg = $$(dotClass(clases.INLINE), $consola);
         let contador = $$inlineMsg.length + 1; // Aun no sé bien pero el contador comienza en cero por eso sumo 1
 
