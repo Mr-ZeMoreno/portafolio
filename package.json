@@ -7,8 +7,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "test": "playwright test "
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/react": "^3.6.2",
