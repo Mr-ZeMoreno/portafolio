@@ -3,14 +3,14 @@ import BackgroundCode from "../components/BackgroundCode.astro";
 import Consola from "../components/Consola.astro";
 import CppCode from "../components/CppCode.astro";
 import Status from "../components/Status.astro";
-import Imagen from "../components/Imagen.jsx";
+import Imagen from "../components/reproductor/Reproductor.jsx";
 import Layout from "../layouts/Layout.astro";
 import VerticalText from "../components/VerticalText.astro";
 ---
 
 <Layout title="Mr-ZeMoreno">
   <BackgroundCode />
-  <div
+  <section
     class="black-paper bg-[#141212e1] md:bg-[#262626cc] bg-none md:bg-[url('/src/img/black-texture.webp')]"
   >
     <h3 class="correo text-sm md:text-xl">
@@ -28,7 +28,7 @@ import VerticalText from "../components/VerticalText.astro";
       <Consola />
     </div>
     <CppCode />
-  </div>
+  </section>
 </Layout>
 <style>
   body {

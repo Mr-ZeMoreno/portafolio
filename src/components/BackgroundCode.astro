@@ -1,8 +1,10 @@
 <script>
+  import type { HTMLString } from "astro/dist/runtime/server";
   import hljs from "highlight.js";
   import "highlight.js/styles/default.css";
 
-  const htmlCode = document.querySelector("html").innerHTML;
+  const html = document.querySelector("html") as HTMLElement;
+  const htmlCode = html.innerHTML;
 
   const language = "html";
   const ignoreIllegals = true;
@@ -12,7 +14,8 @@
     ignoreIllegals,
   }).value;
 
-  document.querySelector(".codigo-html").innerHTML = highlightedHtml;
+  const $codigo = document.querySelector(".codigo-html") as HTMLElement;
+  $codigo.innerHTML = highlightedHtml;
 </script>
 
 <pre class="codigo">

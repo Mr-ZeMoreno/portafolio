@@ -1,4 +1,3 @@
-// Define una clase Console
 export class Console {
     constructor(padre) {
         this.padre = padre;
@@ -21,10 +20,11 @@ export class Console {
     }
 
     command(htmlElement, inputValue) {
-
         const comando = {
             CLEAR: "clear",
-            HOLA: "hola"
+            HOLA: "hola",
+            PLAY: "player play",
+            PAUSE: "player pause",
         }
 
         let value = inputValue.toLowerCase();
@@ -33,8 +33,12 @@ export class Console {
             return;
         } else if (value === comando.HOLA) {
             this.appendChild("Hola, ¿Cómo estás?", "alerta-msg");
+        } else if (value === comando.PLAY){
+            this.appendChild("Reproduciendo", "alerta-msg");
+            
         }
     }
+
     removeAllElements(htmlElement) {
         if (htmlElement.length >= 0) {
             htmlElement.forEach((elemento) => {
