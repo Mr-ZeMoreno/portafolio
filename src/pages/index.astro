@@ -12,10 +12,7 @@ import VerticalText from "../components/VerticalText.astro";
   <section
     class="black-paper bg-[#141212e1] h-[100dvh] md:h-[70dvh] md:bg-[#262626cc] bg-none md:bg-[url('/src/img/black-texture.webp')]"
   >
-    <h3 class="correo text-sm md:text-xl">
-      <a href="mailto:hola@mr-zemoreno.dev">josecarlosvidal2@gmail.com</a>
-    </h3>
-    <h1 class="title text-4xl md:text-[68px]">
+    <h1 class="title text-4xl md:text-[68px] mt-4">
       MR-ZEMORENO<span class="hidden md:inline text-[#b47b27] text-[50px]"
         >⭢</span
       ><span
@@ -68,8 +65,7 @@ import VerticalText from "../components/VerticalText.astro";
     grid-template-areas: "correo" "titulo" "about" ""; */
   }
 
-  .title,
-  .correo {
+  .title {
     font-family: "Archivo Black", sans-serif;
   }
   .title {
@@ -78,14 +74,5 @@ import VerticalText from "../components/VerticalText.astro";
     transform: scaleY(1.2);
     text-align: center;
     line-height: 1;
-  }
-  .correo {
-    text-align: right;
-    font-size: 17px;
-    transition: ease-in 0.1s;
-    margin-right: 10px;
-  }
-  .correo:hover {
-    transform: scale(1.02);
   }
 </style>

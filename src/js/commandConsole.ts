@@ -7,6 +7,7 @@ export class Console {
       this.padre = padre;
       this.comandos = {
         hola: this.hola.bind(this),
+        contact: this.contact.bind(this),
         clear: this.clear.bind(this),
         play: this.play.bind(this),
         pause: this.pause.bind(this),
@@ -49,6 +50,27 @@ export class Console {
       }
     }
 
+    appendRrss(url: string, imgSrc: string, altText: string, contenedor: HTMLElement) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+  
+      const img = document.createElement("img");
+      img.src = imgSrc;
+      img.alt = altText;
+      img.style.width = "24px"; // Ajusta el tamaño del icono
+      img.style.height = "24px";
+      img.style.margin = "0 5px"; // Espaciado entre íconos
+  
+      link.appendChild(img);
+      
+      // Añadir el enlace al contenedor proporcionado
+      contenedor.appendChild(link);
+  }
+  
+  
+
     clear() {
       this.padre.innerHTML = "";
     }
@@ -78,6 +100,27 @@ export class Console {
 
       this.appendChild(helpMessage, "middle-msg");
     }
+
+contact() {
+    const mensaje = "Puedes encontrarme en las siguientes redes sociales:";
+    this.appendChild(mensaje, "middle-msg");
+
+    const $contenedorRrss = document.createElement("div");
+    $contenedorRrss.style.marginTop = "5px";
+    $contenedorRrss.style.display = "flex";
+    $contenedorRrss.style.alignItems = "center";
+    $contenedorRrss.style.justifyContent = "center";
+
+    this.appendRrss("https://www.linkedin.com/in/josecarlos-vidal/", "/svg/linkedin.svg", "LinkedIn", $contenedorRrss);
+    this.appendRrss("https://github.com/Mr-ZeMoreno", "/svg/github.svg", "GitHub", $contenedorRrss);
+
+    if (this.padre) {
+        this.padre.appendChild($contenedorRrss);
+    }
+}
+  
+  
+   
 
     play() {
       const $thumbnail = document.querySelector(".imagen") as HTMLElement;
