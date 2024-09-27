@@ -1,48 +1,45 @@
 <script>
-    import hljs from "highlight.js/lib/core";
-    import cpp from "highlight.js/lib/languages/cpp";
-    import "highlight.js/styles/default.css";
-    import { $ } from "../js/utils";
+  import hljs from "highlight.js/lib/core";
+  import c from "highlight.js/lib/languages/c";
+  import "highlight.js/styles/default.css";
+  import { $ } from "../js/utils";
 
-    hljs.registerLanguage("cpp", cpp);
+  hljs.registerLanguage("c", c);
 
-    const cppCode = `
-      int vida(int dias_destinados) {
-          if(dias_destinados == 0) {
-              hablar_con_dios();
-              return 0;
-          } else {
-              despertar();
-              comer();
-              dormir();
-              return vida(dias_destinados - 1);
-          }
-      }
+  const cCode = `
+    // La función más linda
+    int fibonacci(int n){
+        if(n<=3){
+            return 1;
+        }else{
+            return fibonacci(n-2)+fibonacci(n-1);
+        }
+    }
     `;
 
-    const highlightedCpp = hljs.highlight(cppCode, {
-        language: "cpp",
-        ignoreIllegals: true,
-    }).value;
+  const highlightedCpp = hljs.highlight(cCode, {
+    language: "cpp",
+    ignoreIllegals: true,
+  }).value;
 
-    document.addEventListener("DOMContentLoaded", () => {
-        $(".codigo-cpp").innerHTML = highlightedCpp;
-    });
+  document.addEventListener("DOMContentLoaded", () => {
+    $(".codigo-cpp").innerHTML = highlightedCpp;
+  });
 </script>
 
 <pre class="hidden md:block"><code class="codigo-cpp" is:raw> </code></pre>
 
 <style is:global>
-    .hljs-type,
-    .hljs-keyword {
-        color: #27907b;
-    }
-    .hljs-title,
-    .hljs-built_in {
-        color: #ffff52;
-        font-weight: normal;
-    }
-    .hljs-number {
-        color: greenyellow;
-    }
+  .hljs-type,
+  .hljs-keyword {
+    color: #27907b;
+  }
+  .hljs-title,
+  .hljs-built_in {
+    color: #ffff52;
+    font-weight: normal;
+  }
+  .hljs-number {
+    color: greenyellow;
+  }
 </style>
