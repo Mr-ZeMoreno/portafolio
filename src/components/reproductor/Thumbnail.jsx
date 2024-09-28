@@ -1,5 +1,5 @@
 import "../../styles/imagenStyles.css";
-import { Volume } from "./Volume";
+import { Volume } from "./Volume.tsx";
 
 const Thumbnail = ({ audioRef, onClick, isPlaying, isEnd, timer, children }) => {
     return (
