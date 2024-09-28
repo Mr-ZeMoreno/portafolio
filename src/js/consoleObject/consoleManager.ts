@@ -49,7 +49,7 @@ export class ConsoleManager {
             this.appendMessage(inputValue, messageFormat.inline);
             this.comandos[comando](inputValue);
         } else {
-            this.appendMessage(".", "middle-msg");
+            this.appendMessage(".", messageFormat.middle);
             this.appendMessage(`Comando no reconocido: ${inputValue}`, messageFormat.middle);
             this.appendMessage(".", messageFormat.middle);
         }
