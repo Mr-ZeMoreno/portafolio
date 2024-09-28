@@ -32,7 +32,3 @@
     grid-area: image;
     transition: filter .5s ease-in;
 }
-
-.imagen:hover{
-    cursor: pointer;
-}
