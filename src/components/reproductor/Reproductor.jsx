@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Thumbnail from './Thumbnail.tsx';
-import { ConsoleManager } from '../../js/consoleObject/consoleManager.ts';
+import { ConsoleManager, messageFormat } from '../../js/consoleObject/consoleManager.ts';
 import { Reproductor as Rep } from '../../js/consoleObject/Reproductor/Reproductor.ts';
 
 const Reproductor = ({ children }) => {
@@ -47,7 +47,7 @@ const Reproductor = ({ children }) => {
     };
 
     const handleAudioEnd = () => {
-        consoleRef.current.appendMessage("La canción ha terminado", "middle-msg");
+        consoleRef.current.appendMessage("La canción ha terminado", messageFormat.middle);
     };
 
     const AudioAttributes = {

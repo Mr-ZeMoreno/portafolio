@@ -2,7 +2,7 @@ import { ConsoleMediaHandler } from "./consoleMediaHandler";
 import { ConsoleMessage } from "./consoleMessage";
 import { ConsoleCommands } from "./consoleTextCommand";
 
-const messageFormat = {
+export const messageFormat = {
     middle: "middle-msg",
     inline: "inline-msg"
 }

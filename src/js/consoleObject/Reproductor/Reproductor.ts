@@ -25,7 +25,6 @@ export class Reproductor{
     }
 
     play(){
-        this.$rep.currentTime = 168;
         this.$rep.play();
     }
 
