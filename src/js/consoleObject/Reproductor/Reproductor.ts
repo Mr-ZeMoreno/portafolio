@@ -26,6 +26,10 @@ export class Reproductor{
         this.$rep.pause();
     }
 
+    isPaused(){
+        return this.$rep.paused
+    }
+
     onEnd(handler: ()=> void){
         this.$rep.addEventListener(allowedConfig.listeners.end, handler);
     }
@@ -34,5 +38,8 @@ export class Reproductor{
     }
     onPause(handler: ()=> void){
         this.$rep.addEventListener(allowedConfig.listeners.pause, handler);
+    }
+    onTimeUpdate(handler: ()=>void){
+        this.$rep.addEventListener("timeupdate", handler);
     }
 }
