@@ -1,6 +1,7 @@
 <script>
   import { $, $$, clases, dotClass } from "../js/utils";
   import { ConsoleManager } from "../js/consoleObject/consoleManager";
+  import { messageFormat } from "../js/consoleObject/consoleManager";
 
   document.addEventListener("DOMContentLoaded", () => {
     const $inputElement = $("#input-msg") as HTMLInputElement;
@@ -24,16 +25,11 @@
 
         consola.ejecutarComando(inputValue);
 
-        let $$inlineMsg = $$(dotClass(clases.INLINE), $consola);
+        let $$inlineMsg = $$(dotClass(messageFormat.middle), $consola);
         let contador = $$inlineMsg.length + 1;
 
-        if (contador % 8 == 0 && contador > 0) {
-          const $alertMsg = $$(dotClass(clases.ALERTA), $consola);
-          consola.removeAllElements($alertMsg);
-          consola.appendMessage(
-            "intenta usar el comando 'clear'",
-            clases.ALERTA
-          );
+        if (contador > 40) {
+          consola.removeFirstElements();
         }
       }
     });

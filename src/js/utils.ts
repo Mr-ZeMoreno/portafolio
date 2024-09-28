@@ -19,7 +19,6 @@ export const $$ = (query: string, parent: Document | Element = document): NodeLi
 
 
 export const clases = {
-    ALERTA: "alerta-msg",
     INLINE: "inline-msg",
     MSG: "msg",
     CONSOLA: "consola",

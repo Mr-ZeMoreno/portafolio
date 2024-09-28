@@ -112,7 +112,18 @@ export class ConsoleManager {
           });
         }
       }
-  
+
+      removeFirstElements() {
+        const elements = this.padre.children;
+    
+        const elementsToRemove = Math.min(1, elements.length);
+        
+        for (let i = 0; i < elementsToRemove; i++) {
+            elements[i].remove(); 
+        }
+    }
+    
+    
       limpiarInput(htmlElement: HTMLInputElement) {
         htmlElement.value = "";
       }
