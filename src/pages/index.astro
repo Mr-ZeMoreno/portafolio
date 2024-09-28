@@ -6,13 +6,9 @@ import Imagen from "../components/reproductor/Reproductor.jsx";
 import Layout from "../layouts/Layout.astro";
 import VerticalText from "../components/VerticalText.astro";
 import Title from "../components/Tile.astro";
-import WorkingPage from "../components/WorkingPage.astro";
-import { PROD_ENV } from "astro:env/client";
 ---
 
 <Layout title="Mr-ZeMoreno">
-  {PROD_ENV && <WorkingPage />}
-
   <BackgroundCode />
   <section
     class="flex flex-col
