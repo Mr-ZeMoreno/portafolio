@@ -13,7 +13,7 @@ export function Volume({audioRef, className}){
     };
     return (
         <>
-            <input className={`volume opacity-0 transition-all ${className}`} 
+            <input className={`volume opacity-0 transition-all mt-2 mb-2 ${className}`} 
                 type="range"
                 min="0"
                 max="1"

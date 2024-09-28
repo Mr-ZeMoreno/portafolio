@@ -15,12 +15,16 @@ import { PROD_ENV } from "astro:env/client";
 
   <BackgroundCode />
   <section
-    class="flex flex-col mt-auto mb-auto black-paper bg-[#141212e1] h-[100dvh] md:h-[70dvh] md:bg-[#262626cc] bg-none md:bg-[url('/src/img/black-texture.webp')]"
+    class="flex flex-col
+    mt-auto mb-auto
+    black-paper
+    bg-[#141212e1] md:bg-[#262626cc] md:bg-[url('/src/img/black-texture.webp')]
+    h-[100dvh] md:h-[70dvh]"
   >
     <Title />
     <div
-      class="flex flex-col h-auto w-full
-             md:grid md:grid-template-areas-md md:h-[350px]"
+      class="flex flex-col md:grid md:grid-template-areas-md
+      h-auto w-full md:h-[350px]"
     >
       <Imagen client:load>
         <VerticalText>「ロボットそれとも人間？」</VerticalText>
@@ -57,9 +61,6 @@ import { PROD_ENV } from "astro:env/client";
       padding: 28px;
       padding-top: 30px;
       z-index: 2;
-
-      /* display: grid;
-    grid-template-areas: "correo" "titulo" "about" ""; */
     }
   </style>
 </Layout>
