@@ -38,6 +38,7 @@ export class ConsoleManager {
             clear: this.clear.bind(this),
             play: this.play.bind(this),
             pause: this.pause.bind(this),
+            stop: this.stop.bind(this),
             help: this.help.bind(this),
         };
     }
@@ -83,6 +84,11 @@ export class ConsoleManager {
     pause() {
         this.appendMessage("Pausado", messageFormat.middle);
         this.mediaHandler.pauseAudio();
+    }
+
+    stop() {
+        this.appendMessage("Se ha detenido y puesto al comienzo", messageFormat.middle);
+        this.mediaHandler.stopAudio();
     }
 
     help() {

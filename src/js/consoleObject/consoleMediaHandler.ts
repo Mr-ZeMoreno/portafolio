@@ -46,6 +46,11 @@ export class ConsoleMediaHandler {
       this.reproductor.play();
   }
 
+  stopAudio(){
+    this.handleAudioEnd();
+    this.reproductor.stop();
+  }
+
   pauseAudio() {
       this.thumbnail.setInvertColor(false);
       this.thumbnail.setTitle(true);

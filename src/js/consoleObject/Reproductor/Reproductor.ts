@@ -32,6 +32,11 @@ export class Reproductor{
         this.$rep.pause();
     }
 
+    stop(){
+        this.$rep.currentTime = 0;
+        this.pause();
+    }
+
     setVolume(newVolume: number){
         this.$rep.volume = newVolume;
     }
