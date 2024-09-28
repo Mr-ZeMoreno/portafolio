@@ -1,7 +1,7 @@
 import "../../styles/volumeStyles.css"
 import { useState } from 'react';
 
-export function Volume({ audioRef, className }: { audioRef: HTMLAudioElement, className: string }) {
+export function Volume({ audioRef, className }: { audioRef: HTMLAudioElement, className?: string }) {
     const [volume, setVolume] = useState(1);
 
     const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
