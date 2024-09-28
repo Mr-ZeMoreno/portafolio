@@ -1,9 +1,10 @@
 const allowedConfig = {
     reproductor: "#audio-rep",
     listeners:{
-        end:"end",
+        end:"ended",
         play: "play",
-        pause: "pause"
+        pause: "pause",
+        timeupdate: "timeupdate"
     }
 }
 
@@ -42,7 +43,7 @@ export class Reproductor{
 
     onEnd(handler: ()=> void, set:boolean = true){
         if(set){
-        this.$rep.addEventListener(allowedConfig.listeners.end, handler);
+            this.$rep.addEventListener(allowedConfig.listeners.end, handler);
         }else{
             this.$rep.removeEventListener(allowedConfig.listeners.end, handler);
         }
@@ -63,9 +64,9 @@ export class Reproductor{
 }
     onTimeUpdate(handler: ()=>void, set:boolean = true){
         if(set){
-            this.$rep.addEventListener("timeupdate", handler);
+            this.$rep.addEventListener(allowedConfig.listeners.timeupdate, handler);
         }else{
-            this.$rep.removeEventListener("timeupdate", handler);
+            this.$rep.removeEventListener(allowedConfig.listeners.timeupdate, handler);
         }
 }
 }

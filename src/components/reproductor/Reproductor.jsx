@@ -47,9 +47,6 @@ const Reproductor = ({ children }) => {
     };
 
     const handleAudioEnd = () => {
-        setIsPlaying(false);
-        setIsEnd(true);
-
         consoleRef.current.appendMessage("La canción ha terminado", "middle-msg");
     };
 
