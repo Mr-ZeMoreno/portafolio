@@ -26,10 +26,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
       >
         {children}
         <div className="ml-auto mr-[5px] flex items-center justify-between flex-col h-full pb-3">
-          <span id="timer" className="opacity-0">{timer} s</span>
+          <span id="timer" className="opacity-0 transition-all duration-200">{timer} s</span>
         </div>
       </button>
-      <Volume audioRef={audioRef} />
+      <Volume audioRef={audioRef} className="transition-all duration-200" />
     </>
   );
 };
