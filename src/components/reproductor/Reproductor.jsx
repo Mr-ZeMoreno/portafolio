@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Thumbnail from './Thumbnail';
-import { Console } from '../../js/commandConsole';
+import { ConsoleManager } from '../../js/consoleObject/consoleManager';
 import { $, clases, dotClass } from "../../js/utils";
 
 const Reproductor = ({ children }) => {
@@ -12,7 +12,7 @@ const Reproductor = ({ children }) => {
 
     useEffect(() => {
         const $consola = $(dotClass(clases.CONSOLA));
-        consoleRef.current = new Console($consola);
+        consoleRef.current = new ConsoleManager($consola);
 
         const audio = audioRef.current;
         if (audio) {
@@ -29,12 +29,11 @@ const Reproductor = ({ children }) => {
     }, []);
 
     const handleThumbnailClick = () => {
-        // Verificar si el audio ya está reproduciéndose o está en pausa
         if (audioRef.current) {
             if (audioRef.current.paused) {
-                play(); // Si está en pausa, reproducir
+                play();
             } else {
-                pause(); // Si está reproduciendo, pausar
+                pause();
             }
         }
     };
@@ -62,7 +61,7 @@ const Reproductor = ({ children }) => {
             audio.play();
             setIsPlaying(true);
             setIsEnd(false);
-            consoleRef.current.play(); // Llama al método play de la consola
+            consoleRef.current.play(); 
         }
     };
 
@@ -71,7 +70,7 @@ const Reproductor = ({ children }) => {
         if (audio) {
             audio.pause();
             setIsPlaying(false);
-            consoleRef.current.pause(); // Llama al método pause de la consola
+            consoleRef.current.pause();
         }
     };
 

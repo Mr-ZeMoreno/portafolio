@@ -118,9 +118,6 @@ contact() {
         this.padre.appendChild($contenedorRrss);
     }
 }
-  
-  
-   
 
     play() {
       const $thumbnail = document.querySelector(".imagen") as HTMLElement;

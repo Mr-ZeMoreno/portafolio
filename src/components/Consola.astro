@@ -1,6 +1,6 @@
 <script>
   import { $, $$, clases, dotClass } from "../js/utils";
-  import { Console } from "../js/commandConsole";
+  import { ConsoleManager } from "../js/consoleObject/consoleManager";
 
   document.addEventListener("DOMContentLoaded", () => {
     const $inputElement = $("#input-msg") as HTMLInputElement;
@@ -15,7 +15,7 @@
       $inputElement.placeholder = "";
 
       const $consola = $(dotClass(clases.CONSOLA)) as HTMLElement;
-      const consola = new Console($consola);
+      const consola = new ConsoleManager($consola);
 
       if ($inputElement) {
         const inputValue = $inputElement.value;
@@ -29,7 +29,10 @@
         if (contador % 8 == 0 && contador > 0) {
           const $alertMsg = $$(dotClass(clases.ALERTA), $consola);
           consola.removeAllElements($alertMsg);
-          consola.appendChild("intenta usar el comando 'clear'", clases.ALERTA);
+          consola.appendMessage(
+            "intenta usar el comando 'clear'",
+            clases.ALERTA
+          );
         }
       }
     });
