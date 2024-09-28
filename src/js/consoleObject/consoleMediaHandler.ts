@@ -13,21 +13,21 @@ export class ConsoleMediaHandler {
     handleAudioEnd() {
       const $thumbnail = document.querySelector(".imagen") as HTMLElement;
       $thumbnail.classList.remove("invert-color");
-      const $timer = $thumbnail.querySelector("span.ml-auto") as HTMLElement;
+      const $timer = $thumbnail.querySelector("#timer") as HTMLElement;
       $thumbnail.title =  "Reproducir música"; 
       
       if ($timer) {
-        $timer.classList.add("hidden");
+        $timer.classList.add("opacity-0");
       }
     }
   
     playAudio() {
       const $thumbnail = document.querySelector(".imagen") as HTMLElement;
       const $rep = document.querySelector("#audio-rep") as HTMLAudioElement;
-      const $timer = $thumbnail.querySelector("span.ml-auto") as HTMLElement;
+      const $timer = $thumbnail.querySelector("#timer") as HTMLElement;
   
       $thumbnail.classList.add("invert-color");
-      $timer?.classList.remove("hidden");
+      $timer?.classList.remove("opacity-0");
       $thumbnail.title = "Pausar música";
 
       $rep.play();

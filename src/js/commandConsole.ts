@@ -29,7 +29,7 @@ export class Console {
           ) as HTMLElement;
 
           if ($timer) {
-            $timer.classList.add("hidden");
+            $timer.classList.add("opacity-0");
           }
         });
       }
@@ -130,7 +130,7 @@ contact() {
       );
 
       $thumbnail.classList.add("invert-color");
-      $timer.classList.remove("hidden");
+      $timer.classList.remove("opacity-0");
       $rep.play();
     }
 

@@ -31,9 +31,9 @@ const Reproductor = ({ children }) => {
     const handleThumbnailClick = () => {
         if (audioRef.current) {
             if (audioRef.current.paused) {
-                play();
+                consoleRef.current.play();
             } else {
-                pause();
+                consoleRef.current.pause();
             }
         }
     };
@@ -47,7 +47,8 @@ const Reproductor = ({ children }) => {
     const handleAudioEnd = () => {
         setIsPlaying(false);
         setIsEnd(true);
-        consoleRef.current.appendChild("La canción ha terminado", "middle-msg");
+
+        consoleRef.current.appendMessage("La canción ha terminado", "middle-msg");
     };
 
     const AudioAttributes = {
@@ -55,24 +56,7 @@ const Reproductor = ({ children }) => {
         Url: "music/01 Wait a Minute.mp3"
     };
 
-    const play = () => {
-        const audio = audioRef.current;
-        if (audio) {
-            audio.play();
-            setIsPlaying(true);
-            setIsEnd(false);
-            consoleRef.current.play(); 
-        }
-    };
 
-    const pause = () => {
-        const audio = audioRef.current;
-        if (audio) {
-            audio.pause();
-            setIsPlaying(false);
-            consoleRef.current.pause();
-        }
-    };
 
     return (
         <>
@@ -81,6 +65,8 @@ const Reproductor = ({ children }) => {
                 isPlaying={isPlaying}
                 isEnd={isEnd}
                 timer={currentTime.toFixed(0)}
+                audioRef={audioRef}
+
             >
                 {children}
             </Thumbnail>
