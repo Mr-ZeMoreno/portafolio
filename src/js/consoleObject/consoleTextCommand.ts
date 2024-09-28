@@ -41,12 +41,7 @@ export class ConsoleCommands {
       "Las herramientas usadas para este proyecto fueron:",
       "middle-msg"
     );
-    const $contenedorFrameworks = document.createElement("div");
-
-    $contenedorFrameworks.style.marginTop = "5px";
-    $contenedorFrameworks.style.display = "flex";
-    $contenedorFrameworks.style.alignItems = "center";
-    $contenedorFrameworks.style.justifyContent = "center";
+    const $contenedorFrameworks = this.createContainer();
 
     const socialLinks = new SocialLinks($contenedorFrameworks);
 
@@ -68,17 +63,15 @@ export class ConsoleCommands {
 
     this.padre.appendChild($contenedorFrameworks);
   }
+
   contact() {
     this.appendMessage(
       "Puedes encontrarme en las siguientes redes sociales:",
       "middle-msg"
     );
 
-    const $contenedorRrss = document.createElement("div");
-    $contenedorRrss.style.marginTop = "5px";
-    $contenedorRrss.style.display = "flex";
-    $contenedorRrss.style.alignItems = "center";
-    $contenedorRrss.style.justifyContent = "center";
+    const $contenedorRrss = this.createContainer();
+
     const socialLinks = new SocialLinks($contenedorRrss);
 
     socialLinks.appendRrss(
@@ -98,5 +91,16 @@ export class ConsoleCommands {
   appendMessage(inputValue: string, clase: string) {
     const newMessage = new ConsoleMessage(this.padre, inputValue, clase);
     newMessage.displayMessage();
+  }
+
+  private createContainer(){
+    const $contenedorRrss = document.createElement("div");
+    $contenedorRrss.classList.add("mt-1.5")
+    $contenedorRrss.classList.add("flex")
+    $contenedorRrss.classList.add("items-center")
+    $contenedorRrss.classList.add("justify-center")
+    $contenedorRrss.classList.add("gap-2")
+
+    return $contenedorRrss
   }
 }
