@@ -10,8 +10,10 @@ export class SocialLinks {
       const img = document.createElement("img");
       img.src = imgSrc;
       img.alt = altText;
-      img.style.width = "24px";
-      img.style.height = "24px";
+      img.classList.add("h-9")
+      img.classList.add("w-9")
+      img.classList.add("md:h-8")
+      img.classList.add("md:w-9")
       img.style.margin = "0 5px";
   
       link.appendChild(img);
