@@ -14,7 +14,8 @@ export class ConsoleMediaHandler {
       const $thumbnail = document.querySelector(".imagen") as HTMLElement;
       $thumbnail.classList.remove("invert-color");
       const $timer = $thumbnail.querySelector("span.ml-auto") as HTMLElement;
-  
+      $thumbnail.title =  "Reproducir música"; 
+      
       if ($timer) {
         $timer.classList.add("hidden");
       }
