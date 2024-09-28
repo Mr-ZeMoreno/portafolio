@@ -5,38 +5,19 @@ import Status from "../components/Status.astro";
 import Imagen from "../components/reproductor/Reproductor.jsx";
 import Layout from "../layouts/Layout.astro";
 import VerticalText from "../components/VerticalText.astro";
-
+import Title from "../components/Tile.astro";
+import WorkingPage from "../components/WorkingPage.astro";
 import { PROD_ENV } from "astro:env/client";
 ---
 
 <Layout title="Mr-ZeMoreno">
-  {
-    PROD_ENV && (
-      <div class="fixed text-white text-center flex flex-col justify-center items-center md:hidden h-full w-full z-50 bg-black top-0 left-0">
-        <p>
-          Lo siento, aún estoy desarrollando para esta relaciones de aspecto.
-          <br />
-          Por favor visítanos en un PC.
-        </p>
-        <img src="/svg/crane.svg" alt="crane" class="h-20 w-20 mt-4" />
-      </div>
-    )
-  }
+  {PROD_ENV && <WorkingPage />}
 
   <BackgroundCode />
   <section
-    class="black-paper bg-[#141212e1] h-[100dvh] md:h-[70dvh] md:bg-[#262626cc] bg-none md:bg-[url('/src/img/black-texture.webp')]"
+    class="flex flex-col mt-auto mb-auto black-paper bg-[#141212e1] h-[100dvh] md:h-[70dvh] md:bg-[#262626cc] bg-none md:bg-[url('/src/img/black-texture.webp')]"
   >
-    <h1 class="title text-4xl md:text-[68px] mt-4">
-      MR-ZEMORENO<span class="hidden md:inline text-[#b47b27] text-[50px]"
-        >⭢</span
-      ><span
-        class="hidden md:inline text-sm text-[#ffff52] align-middle relative tracking-normal"
-      >
-        horror vacui
-      </span><span class="hidden md:inline text-[#b47b27] text-[50px]">⭠</span>
-    </h1>
-
+    <Title />
     <div
       class="flex flex-col h-auto w-full
              md:grid md:grid-template-areas-md md:h-[350px]"
@@ -47,6 +28,7 @@ import { PROD_ENV } from "astro:env/client";
       <Status gridArea={"status"} />
       <Consola />
     </div>
+    <p class="w-full text-center mt-auto"></p>
   </section>
 
   <style>
@@ -78,17 +60,6 @@ import { PROD_ENV } from "astro:env/client";
 
       /* display: grid;
     grid-template-areas: "correo" "titulo" "about" ""; */
-    }
-
-    .title {
-      font-family: "Archivo Black", sans-serif;
-    }
-    .title {
-      letter-spacing: -3px;
-      display: inline-block;
-      transform: scaleY(1.2);
-      text-align: center;
-      line-height: 1;
     }
   </style>
 </Layout>
