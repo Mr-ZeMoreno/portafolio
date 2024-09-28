@@ -14,8 +14,9 @@
 
       $inputElement.placeholder = "";
 
-      const $consola = $(dotClass(clases.CONSOLA)) as HTMLElement;
-      const consola = new ConsoleManager($consola);
+      const consola = new ConsoleManager();
+
+      const $consola = consola.getConsola();
 
       if ($inputElement) {
         const inputValue = $inputElement.value;
@@ -54,7 +55,7 @@
       />
     </label>
   </form>
-  <div class="consola msg"></div>
+  <div id="consola" class="msg"></div>
 </div>
 
 <style is:global>

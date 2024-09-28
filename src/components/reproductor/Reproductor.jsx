@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import Thumbnail from './Thumbnail';
-import { ConsoleManager } from '../../js/consoleObject/consoleManager';
-import { $, clases, dotClass } from "../../js/utils";
+import Thumbnail from './Thumbnail.tsx';
+import { ConsoleManager } from '../../js/consoleObject/consoleManager.ts';
+import { $, clases, dotClass } from "../../js/utils.ts";
 
 const Reproductor = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -12,7 +12,7 @@ const Reproductor = ({ children }) => {
 
     useEffect(() => {
         const $consola = $(dotClass(clases.CONSOLA));
-        consoleRef.current = new ConsoleManager($consola);
+        consoleRef.current = new ConsoleManager();
 
         const audio = audioRef.current;
         if (audio) {
