@@ -79,7 +79,7 @@ export class Console {
       this.appendChild(
         "Hola, Soy Josecarlos, también conocido como Zemoreno. " +
           "Soy apasionado de la programación 👨🏽‍💻, el sushi 🍣 y la música soul 🎧. " +
-          "No dudes en contactarme a mi correo y disfruta de la canción de turno, " +
+          "No dudes en contactarme y disfruta de la canción de turno, " +
           "la cual voy cambiando semanalmente.",
         "middle-msg"
       );
