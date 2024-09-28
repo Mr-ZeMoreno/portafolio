@@ -12,6 +12,7 @@ export class ConsoleManager {
     comandos: { [key: string]: (inputValue: string) => void };
     mediaHandler: ConsoleMediaHandler;
     commands: ConsoleCommands;
+    message: ConsoleMessage;
 
     constructor(padre?:HTMLElement) {
         if(padre){
@@ -19,6 +20,7 @@ export class ConsoleManager {
         }else{
             this.padre = document.querySelector("#consola") as HTMLElement;
         }
+        this.message = new ConsoleMessage(this.padre);
         this.comandos = {};
         this.mediaHandler = new ConsoleMediaHandler;  
         this.commands = new ConsoleCommands(this.padre);
@@ -58,12 +60,15 @@ export class ConsoleManager {
     appendMessage(inputValue: string, format: string) {
         const allowedFormats = Object.values(messageFormat);
         if (allowedFormats.includes(format)) {
-            const newMessage = new ConsoleMessage(this.padre, inputValue, format);
-            newMessage.displayMessage();
+            this.message.displayMessage(inputValue, format);
         } else {
             console.error(`Formato no permitido: ${format}`);
         }
     }
+
+    appendMusic(name:string, autor:string, link:string){
+        this.message.displayMusic(name, autor, link);
+    }   
 
     hola(){
         this.commands.hola();
@@ -77,7 +82,12 @@ export class ConsoleManager {
     play() {
         const $rep = document.querySelector("#audio-rep") as HTMLAudioElement;
 
-        this.appendMessage(`Reproduciendo ${$rep.getAttribute("name")}`, messageFormat.middle);
+        this.appendMessage(".", messageFormat.middle)
+        this.appendMusic(
+            $rep.getAttribute("name") as string, 
+            $rep.getAttribute("autor") as string, 
+            $rep.getAttribute("link") as string);
+        this.appendMessage(".", messageFormat.middle)
         this.mediaHandler.playAudio();
     }
 

@@ -1,11 +1,14 @@
 import { ConsoleMessage } from "./consoleMessage";
 import { SocialLinks } from "./socialLinks";
+import { messageFormat } from "./consoleManager";
 
 export class ConsoleCommands {
   padre: HTMLElement;
+  message: ConsoleMessage;
 
   constructor(padre: HTMLElement) {
     this.padre = padre;
+    this.message = new ConsoleMessage(this.padre);
   }
 
   hola() {
@@ -14,16 +17,16 @@ export class ConsoleCommands {
         "Soy apasionado de la programación 👨🏽‍💻, el sushi 🍣 y la música soul 🎧. " +
         "No dudes en contactarme y disfruta de la canción de turno, " +
         "la cual voy cambiando semanalmente.",
-      "middle-msg"
+      messageFormat.middle
     );
-    this.appendMessage(".", "middle-msg");
-    this.appendMessage(".", "middle-msg");
+    this.appendMessage(".", messageFormat.middle);
+    this.appendMessage(".", messageFormat.middle);
   }
 
   help(comandos: { [key: string]: (inputValue: string) => void }) {
     this.appendMessage(
       "Comandos disponibles: " + Object.keys(comandos).join(", "),
-      "middle-msg"
+      messageFormat.middle
     );
   }
 
@@ -31,15 +34,15 @@ export class ConsoleCommands {
     this.appendMessage(
       "Esta página no fue creada como portafolio, " +
         "si no más bien como mi espacio personal en el mundo 💫.",
-      "middle-msg"
+      messageFormat.middle
     );
     this.appendMessage(
       ".",
-      "middle-msg"
+      messageFormat.middle
     );
     this.appendMessage(
       "Las herramientas usadas para este proyecto fueron:",
-      "middle-msg"
+      messageFormat.middle
     );
     const $contenedorFrameworks = this.createContainer();
 
@@ -67,7 +70,7 @@ export class ConsoleCommands {
   contact() {
     this.appendMessage(
       "Puedes encontrarme en las siguientes redes sociales:",
-      "middle-msg"
+      messageFormat.middle
     );
 
     const $contenedorRrss = this.createContainer();
@@ -89,8 +92,7 @@ export class ConsoleCommands {
   }
 
   appendMessage(inputValue: string, clase: string) {
-    const newMessage = new ConsoleMessage(this.padre, inputValue, clase);
-    newMessage.displayMessage();
+    this.message.displayMessage(inputValue, clase);
   }
 
   private createContainer(){

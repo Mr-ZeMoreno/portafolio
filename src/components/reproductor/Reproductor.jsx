@@ -51,7 +51,9 @@ const Reproductor = ({ children }) => {
     };
 
     const AudioAttributes = {
-        Name: "'Wait a Minute' de SnakeCity",
+        Name: 'Wait a Minute',
+        Autor:  "SnakeCity",
+        Link: "https://www.youtube.com/channel/UCrHBoFxSriEMaJOTW-fj4bw",
         Url: "music/01 Wait a Minute.mp3"
     };
 
@@ -68,6 +70,8 @@ const Reproductor = ({ children }) => {
                 <audio
                     id="audio-rep"
                     name={AudioAttributes.Name}
+                    autor={AudioAttributes.Autor}
+                    link={AudioAttributes.Link}
                     src={AudioAttributes.Url}
                     preload="auto"
                     ref={(el) => (audioRef.current = el)}
