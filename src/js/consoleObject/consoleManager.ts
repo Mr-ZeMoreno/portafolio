@@ -13,8 +13,12 @@ export class ConsoleManager {
     mediaHandler: ConsoleMediaHandler;
     commands: ConsoleCommands;
 
-    constructor() {
-        this.padre = document.querySelector("#consola") as HTMLElement;
+    constructor(padre?:HTMLElement) {
+        if(padre){
+            this.padre = padre;
+        }else{
+            this.padre = document.querySelector("#consola") as HTMLElement;
+        }
         this.comandos = {};
         this.mediaHandler = new ConsoleMediaHandler;  
         this.commands = new ConsoleCommands(this.padre);

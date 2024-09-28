@@ -1,36 +1,38 @@
 import { useState, useRef, useEffect } from 'react';
 import Thumbnail from './Thumbnail.tsx';
 import { ConsoleManager } from '../../js/consoleObject/consoleManager.ts';
-import { $, clases, dotClass } from "../../js/utils.ts";
+import { Reproductor as Rep } from '../../js/consoleObject/Reproductor/Reproductor.ts';
 
 const Reproductor = ({ children }) => {
-    const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
-    const [isEnd, setIsEnd] = useState(true);
     const audioRef = useRef(null);
+    const consoleElementRef = useRef(null);
     const consoleRef = useRef(null);
+    const reproductorRef = useRef(null);
 
     useEffect(() => {
-        const $consola = $(dotClass(clases.CONSOLA));
         consoleRef.current = new ConsoleManager();
+        consoleElementRef.current = consoleRef.current.getConsola();
+        reproductorRef.current = new Rep();
 
-        const audio = audioRef.current;
-        if (audio) {
-            audio.addEventListener('timeupdate', handleTimeUpdate);
-            audio.addEventListener('ended', handleAudioEnd);
+        audioRef.current = reproductorRef.current.getRep();
+
+        if (audioRef.current) {
+            reproductorRef.current.onTimeUpdate(handleTimeUpdate, true);
+            reproductorRef.current.onEnd(handleAudioEnd, true);
         }
 
         return () => {
-            if (audio) {
-                audio.removeEventListener('timeupdate', handleTimeUpdate);
-                audio.removeEventListener('ended', handleAudioEnd);
+            if (audioRef.current) {
+                reproductorRef.current.onTimeUpdate(handleTimeUpdate, false);
+                reproductorRef.current.onEnd(handleAudioEnd, false);
             }
         };
     }, []);
 
     const handleThumbnailClick = () => {
-        if (audioRef.current) {
-            if (audioRef.current.paused) {
+        if (reproductorRef.current) {
+            if (!reproductorRef.current.isPlaying()) {
                 consoleRef.current.play();
             } else {
                 consoleRef.current.pause();
@@ -56,17 +58,12 @@ const Reproductor = ({ children }) => {
         Url: "music/01 Wait a Minute.mp3"
     };
 
-
-
     return (
         <>
             <Thumbnail
                 onClick={handleThumbnailClick}
-                isPlaying={isPlaying}
-                isEnd={isEnd}
                 timer={currentTime.toFixed(0)}
                 audioRef={audioRef}
-
             >
                 {children}
             </Thumbnail>
@@ -74,10 +71,9 @@ const Reproductor = ({ children }) => {
                 <audio
                     id="audio-rep"
                     name={AudioAttributes.Name}
-                    ref={audioRef}
                     src={AudioAttributes.Url}
-                    className="hidden"
                     preload="auto"
+                    ref={(el) => (audioRef.current = el)}
                 />
             )}
         </>

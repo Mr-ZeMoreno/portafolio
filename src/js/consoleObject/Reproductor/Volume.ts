@@ -1,5 +1,7 @@
+import {Reproductor} from "./Reproductor";
+
 const allowedConfig = {
-    volume: ".volume",
+    volume: "#volume",
     hide: "opacity-0"
 }
 

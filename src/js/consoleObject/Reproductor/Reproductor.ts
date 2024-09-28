@@ -10,15 +10,21 @@ const allowedConfig = {
 export class Reproductor{
     $rep: HTMLAudioElement;
 
-    constructor(){
-        this.$rep = document.querySelector(allowedConfig.reproductor) as HTMLAudioElement;
-    }
+    constructor(padre?:HTMLAudioElement){
+        if(padre){
+            this.$rep = padre;
+        }
+        else{
+            this.$rep = document.querySelector(allowedConfig.reproductor) as HTMLAudioElement;
+        }
+}
 
     getRep(){
         return this.$rep;
     }
 
     play(){
+        this.$rep.currentTime = 168;
         this.$rep.play();
     }
 
@@ -26,20 +32,40 @@ export class Reproductor{
         this.$rep.pause();
     }
 
-    isPaused(){
-        return this.$rep.paused
+    setVolume(newVolume: number){
+        this.$rep.volume = newVolume;
     }
 
-    onEnd(handler: ()=> void){
+    isPlaying(){
+        return !this.$rep.paused
+    }
+
+    onEnd(handler: ()=> void, set:boolean = true){
+        if(set){
         this.$rep.addEventListener(allowedConfig.listeners.end, handler);
-    }
-    onPlay(handler: ()=> void){
+        }else{
+            this.$rep.removeEventListener(allowedConfig.listeners.end, handler);
+        }
+}
+    onPlay(handler: ()=> void, set:boolean = true){
+        if(set){
         this.$rep.addEventListener(allowedConfig.listeners.play, handler);
-    }
-    onPause(handler: ()=> void){
+        }else{
+            this.$rep.removeEventListener(allowedConfig.listeners.play, handler);
+        }
+}
+    onPause(handler: ()=> void, set:boolean = true){
+        if(set){
         this.$rep.addEventListener(allowedConfig.listeners.pause, handler);
-    }
-    onTimeUpdate(handler: ()=>void){
-        this.$rep.addEventListener("timeupdate", handler);
-    }
+        }else{
+            this.$rep.removeEventListener(allowedConfig.listeners.pause, handler);
+        }
+}
+    onTimeUpdate(handler: ()=>void, set:boolean = true){
+        if(set){
+            this.$rep.addEventListener("timeupdate", handler);
+        }else{
+            this.$rep.removeEventListener("timeupdate", handler);
+        }
+}
 }

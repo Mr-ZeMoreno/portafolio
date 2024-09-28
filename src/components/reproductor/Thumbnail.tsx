@@ -14,8 +14,6 @@ interface ThumbnailProps {
 const Thumbnail: React.FC<ThumbnailProps> = ({ 
   audioRef, 
   onClick, 
-  isPlaying, 
-  isEnd, 
   timer, 
   children 
 }) => {
@@ -23,12 +21,12 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     <>
       <button
         title="Reproducir música"
-        className={`imagen flex h-[250px] md:h-[100%] ${isPlaying ? 'invert-color' : ''}`}
+        className={`imagen flex h-[250px] md:h-[100%]`}
         onClick={onClick}
       >
         {children}
         <div className="ml-auto mr-[5px] flex items-center justify-between flex-col h-full pb-3">
-          <span id="timer" className={`${isEnd ? 'opacity-0' : ''}`}>{timer} s</span>
+          <span id="timer">{timer} s</span>
         </div>
       </button>
       <Volume audioRef={audioRef} />
