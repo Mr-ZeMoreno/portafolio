@@ -15,6 +15,12 @@ export class ConsoleMediaHandler {
       $thumbnail.classList.remove("invert-color");
       const $timer = $thumbnail.querySelector("#timer") as HTMLElement;
       $thumbnail.title =  "Reproducir música"; 
+      const $volume = document.querySelector("#volume") as HTMLInputElement;
+
+      if($volume){
+        $volume.classList.add("opacity-0")
+      }
+      
       
       if ($timer) {
         $timer.classList.add("opacity-0");
@@ -25,6 +31,9 @@ export class ConsoleMediaHandler {
       const $thumbnail = document.querySelector(".imagen") as HTMLElement;
       const $rep = document.querySelector("#audio-rep") as HTMLAudioElement;
       const $timer = $thumbnail.querySelector("#timer") as HTMLElement;
+      const $volume = document.querySelector("#volume") as HTMLInputElement;
+
+      $volume.classList.remove("opacity-0")
   
       $thumbnail.classList.add("invert-color");
       $timer?.classList.remove("opacity-0");

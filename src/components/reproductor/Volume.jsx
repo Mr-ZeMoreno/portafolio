@@ -13,12 +13,12 @@ export function Volume({audioRef, className}){
     };
     return (
         <>
-            <input className={`volume ${className}`} 
+            <input className={`volume opacity-0 transition-all ${className}`} 
                 type="range"
                 min="0"
                 max="1"
                 step="0.01"
-                id="progressBar"
+                id="volume"
                 value={volume}
                 onChange={handleVolumeChange}
             />

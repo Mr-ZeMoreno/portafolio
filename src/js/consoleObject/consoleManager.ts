@@ -2,6 +2,11 @@ import { ConsoleMediaHandler } from "./consoleMediaHandler";
 import { ConsoleMessage } from "./consoleMessage";
 import { ConsoleCommands } from "./consoleTextCommand";
 
+const messageFormat = {
+    middle: "middle-msg",
+    inline: "inline-msg"
+}
+
 export class ConsoleManager {
     padre: HTMLElement;
     comandos: { [key: string]: (inputValue: string) => void };
@@ -32,17 +37,25 @@ export class ConsoleManager {
     ejecutarComando(inputValue: string) {
         const comando = inputValue.toLowerCase();
         if (this.comandos[comando]) {
-            this.appendMessage(inputValue, "inline-msg");
+            this.appendMessage(inputValue, messageFormat.inline);
             this.comandos[comando](inputValue);
         } else {
-            this.appendMessage(`Comando no reconocido: ${inputValue}`, "middle-msg");
+            this.appendMessage(".", "middle-msg");
+            this.appendMessage(`Comando no reconocido: ${inputValue}`, messageFormat.middle);
+            this.appendMessage(".", messageFormat.middle);
         }
     }
 
-    appendMessage(inputValue: string, clase: string) {
-        const newMessage = new ConsoleMessage(this.padre, inputValue, clase);
-        newMessage.displayMessage();
+    appendMessage(inputValue: string, format: string) {
+        const allowedFormats = Object.values(messageFormat);
+        if (allowedFormats.includes(format)) {
+            const newMessage = new ConsoleMessage(this.padre, inputValue, format);
+            newMessage.displayMessage();
+        } else {
+            console.error(`Formato no permitido: ${format}`);
+        }
     }
+
     hola(){
         this.commands.hola();
         this.help();
@@ -55,12 +68,12 @@ export class ConsoleManager {
     play() {
         const $rep = document.querySelector("#audio-rep") as HTMLAudioElement;
 
-        this.appendMessage(`Reproduciendo ${$rep.getAttribute("name")}`, "middle-msg");
+        this.appendMessage(`Reproduciendo ${$rep.getAttribute("name")}`, messageFormat.middle);
         this.mediaHandler.playAudio();
     }
 
     pause() {
-        this.appendMessage("Pausado", "middle-msg");
+        this.appendMessage("Pausado", messageFormat.middle);
         this.mediaHandler.pauseAudio();
     }
 

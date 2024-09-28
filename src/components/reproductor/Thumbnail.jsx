@@ -16,7 +16,6 @@ const Thumbnail = ({ audioRef, onClick, isPlaying, isEnd, timer, children }) => 
 </button>
 <Volume 
     audioRef={audioRef} 
-    className={"opacity-100 transition-all"} 
     />
 </>
 
