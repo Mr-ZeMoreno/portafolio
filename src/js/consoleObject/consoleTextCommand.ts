@@ -30,7 +30,7 @@ export class ConsoleCommands {
   about() {
     this.appendMessage(
       "Esta página no fue creada como portafolio, " +
-        "si no más bien como mi espacio personal en el mundo.",
+        "si no más bien como mi espacio personal en el mundo 💫.",
       "middle-msg"
     );
     this.appendMessage(
