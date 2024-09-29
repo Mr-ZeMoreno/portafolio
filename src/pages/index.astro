@@ -5,17 +5,17 @@ import Status from "../components/Status.astro";
 import Imagen from "../components/reproductor/Reproductor.jsx";
 import Layout from "../layouts/Layout.astro";
 import VerticalText from "../components/VerticalText.astro";
-import Title from "../components/Tile.astro";
+import Title from "../components/Title.astro";
 ---
 
 <Layout title="Mr-ZeMoreno">
   <BackgroundCode />
   <section
-    class="flex flex-col
-    mt-auto mb-auto
+    class="mt-auto mb-auto
     black-paper
     bg-[#141212e1] md:bg-[#262626cc] md:bg-[url('/src/img/black-texture.webp')]
-    h-[100dvh] md:h-auto justify-center items-center"
+    h-[100dvh] md:h-auto
+    overflow-y-auto"
   >
     <Title />
     <div

@@ -31,4 +31,5 @@
     background-size: 100%;
     grid-area: image;
     transition: filter .5s ease-in;
+    max-width: 300px;
 }

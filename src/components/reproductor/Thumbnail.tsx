@@ -21,7 +21,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     <>
       <button
         title="Reproducir música"
-        className={`imagen flex h-[250px] md:h-[100%]`}
+        className={`imagen flex h-[250px] md:h-[100%] ml-auto w-full mr-auto md:ml-0 md:mr-0`}
         onClick={onClick}
       >
         {children}
