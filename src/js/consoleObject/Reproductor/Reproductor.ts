@@ -54,14 +54,14 @@ export class Reproductor{
 }
     onPlay(handler: ()=> void, set:boolean = true){
         if(set){
-        this.$rep.addEventListener(allowedConfig.listeners.play, handler);
+            this.$rep.addEventListener(allowedConfig.listeners.play, handler);
         }else{
             this.$rep.removeEventListener(allowedConfig.listeners.play, handler);
         }
 }
     onPause(handler: ()=> void, set:boolean = true){
         if(set){
-        this.$rep.addEventListener(allowedConfig.listeners.pause, handler);
+            this.$rep.addEventListener(allowedConfig.listeners.pause, handler);
         }else{
             this.$rep.removeEventListener(allowedConfig.listeners.pause, handler);
         }

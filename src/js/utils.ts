@@ -17,12 +17,6 @@ export const $$ = (query: string, parent: Document | Element = document): NodeLi
     }
 };
 
-
-export const clases = {
-    INLINE: "inline-msg",
-    MSG: "msg",
-    CONSOLA: "consola",
-};
 export const dotClass = (clase: string) => {
     return "." + clase;
 };
