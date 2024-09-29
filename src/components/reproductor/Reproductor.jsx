@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import Thumbnail from './Thumbnail.tsx';
 import { ConsoleManager, messageFormat } from '../../js/consoleObject/consoleManager.ts';
 import { Reproductor as Rep } from '../../js/consoleObject/Reproductor/Reproductor.ts';
+import data from "../../music.info.json"
 
 const Reproductor = ({ children }) => {
     const [currentTime, setCurrentTime] = useState(0);
@@ -50,13 +51,7 @@ const Reproductor = ({ children }) => {
         consoleRef.current.appendMessage("La canción ha terminado", messageFormat.middle);
     };
 
-    const AudioAttributes = {
-        Name: 'Wait a Minute',
-        Autor:  "SnakeCity",
-        Link: "https://www.youtube.com/channel/UCrHBoFxSriEMaJOTW-fj4bw",
-        Url: "music/01 Wait a Minute.mp3"
-    };
-
+    const AudioAttributes = data.AudioAttributes
     return (
         <>
             <Thumbnail
