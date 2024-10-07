@@ -1,6 +1,7 @@
 import { ConsoleMessage } from "./consoleMessage";
 import { SocialLinks } from "./socialLinks";
 import { messageFormat } from "./consoleManager";
+import Data from "../../consola.info.json"
 
 export class ConsoleCommands {
   padre: HTMLElement;
@@ -12,17 +13,11 @@ export class ConsoleCommands {
   }
 
   hola() {
-    this.appendMessage(
-      "Hola, Soy Josecarlos, también conocido como Zemoreno. " +
-        "Soy apasionado de la programación 👨🏽‍💻, el sushi 🍣 y la música soul 🎧. " +
-        "No dudes en contactarme y disfruta de la canción de turno, " +
-        "la cual voy cambiando semanalmente.",
-      messageFormat.middle
-    );
+    this.appendMessage(Data.hola,messageFormat.middle);
     this.appendMessage(".", messageFormat.middle);
     this.appendMessage(".", messageFormat.middle);
   }
-
+ 
   help(comandos: { [key: string]: (inputValue: string) => void }) {
     this.appendMessage(
       "Comandos disponibles: " + Object.keys(comandos).join(", "),
@@ -32,8 +27,7 @@ export class ConsoleCommands {
 
   about() {
     this.appendMessage(
-      "Esta página no fue creada como portafolio, " +
-        "si no más bien como mi espacio personal en el mundo 💫.",
+      Data.about,
       messageFormat.middle
     );
     this.appendMessage(
