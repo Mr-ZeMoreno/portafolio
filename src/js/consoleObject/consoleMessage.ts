@@ -2,7 +2,7 @@ export class ConsoleMessage {
   private parent: HTMLElement;
 
   constructor(parent: HTMLElement) {
-      this.parent = parent;
+    this.parent = parent;
   }
 
   /**
@@ -11,25 +11,24 @@ export class ConsoleMessage {
    * @param className - La clase CSS para el mensaje.
    */
   displayMessage(message?: string, className?: string) {
-      if (message && className) {
-          const msgElement = document.createElement("div");
-          msgElement.classList.add(className);
+    if (message && className) {
+      const msgElement = document.createElement("div");
+      msgElement.classList.add(className);
 
-          const symbolSpan = document.createElement("span");
-          symbolSpan.className = "green";
-          symbolSpan.textContent = ">";
+      const symbolSpan = document.createElement("span");
+      symbolSpan.className = "green";
+      symbolSpan.textContent = ">";
 
-          const paragraph = document.createElement("p");
-          paragraph.textContent = message;
+      const paragraph = document.createElement("p");
+      paragraph.textContent = message;
 
-          msgElement.appendChild(symbolSpan);
-          msgElement.appendChild(paragraph);
+      msgElement.appendChild(symbolSpan);
+      msgElement.appendChild(paragraph);
 
-
-          this.parent.appendChild(msgElement);
-      } else {
-          console.log("Faltan argumentos");
-      }
+      this.parent.appendChild(msgElement);
+    } else {
+      console.log("Faltan argumentos");
+    }
   }
 
   /**
@@ -37,7 +36,7 @@ export class ConsoleMessage {
    * @param name - El nombre de la canción.
    * @param autor - El autor de la canción.
    * @param link - El enlace para escuchar la canción.
-   * 
+   *
    * Es usado en ConsoleManager
    */
   displayMusic(name: string, autor: string, link: string) {
@@ -46,15 +45,12 @@ export class ConsoleMessage {
 
     const paragraph = document.createElement("p");
 
-
     const nameSpan = document.createElement("span");
     nameSpan.textContent = name;
-    nameSpan.className = "text-fuchsia-500" 
-
+    nameSpan.className = "text-fuchsia-500";
 
     const prefixText = document.createTextNode("Reproduciendo ");
     const suffixText = document.createTextNode(" de ");
-
 
     const anchor = document.createElement("a");
     anchor.href = link;
@@ -62,18 +58,18 @@ export class ConsoleMessage {
     anchor.rel = "noopener noreferrer";
 
     const autorSpan = document.createElement("span");
-    autorSpan.className = "text-lime-500 hover:text-lime-600 transition-all text-[15px]";
+    autorSpan.className =
+      "text-lime-500 hover:text-lime-600 transition-all text-[15px]";
     autorSpan.textContent = autor;
 
-    paragraph.appendChild(prefixText); 
-    paragraph.appendChild(nameSpan); 
+    paragraph.appendChild(prefixText);
+    paragraph.appendChild(nameSpan);
     paragraph.appendChild(suffixText);
-    anchor.appendChild(autorSpan); 
-    paragraph.appendChild(anchor); 
+    anchor.appendChild(autorSpan);
+    paragraph.appendChild(anchor);
 
-    msgElement.appendChild(paragraph); 
+    msgElement.appendChild(paragraph);
 
     this.parent.appendChild(msgElement);
-}
-
+  }
 }

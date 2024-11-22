@@ -1,76 +1,80 @@
 const allowedConfig = {
-    reproductor: "#audio-rep",
-    listeners:{
-        end:"ended",
-        play: "play",
-        pause: "pause",
-        timeupdate: "timeupdate"
+  reproductor: "#audio-rep",
+  listeners: {
+    end: "ended",
+    play: "play",
+    pause: "pause",
+    timeupdate: "timeupdate",
+  },
+};
+
+export class Reproductor {
+  $rep: HTMLAudioElement;
+
+  constructor(padre?: HTMLAudioElement) {
+    if (padre) {
+      this.$rep = padre;
+    } else {
+      this.$rep = document.querySelector(
+        allowedConfig.reproductor,
+      ) as HTMLAudioElement;
     }
-}
+  }
 
-export class Reproductor{
-    $rep: HTMLAudioElement;
+  getRep() {
+    return this.$rep;
+  }
 
-    constructor(padre?:HTMLAudioElement){
-        if(padre){
-            this.$rep = padre;
-        }
-        else{
-            this.$rep = document.querySelector(allowedConfig.reproductor) as HTMLAudioElement;
-        }
-}
+  play() {
+    this.$rep.play();
+  }
 
-    getRep(){
-        return this.$rep;
+  pause() {
+    this.$rep.pause();
+  }
+
+  stop() {
+    this.$rep.currentTime = 0;
+    this.pause();
+  }
+
+  setVolume(newVolume: number) {
+    this.$rep.volume = newVolume;
+  }
+
+  isPlaying() {
+    return !this.$rep.paused;
+  }
+
+  onEnd(handler: () => void, set: boolean = true) {
+    if (set) {
+      this.$rep.addEventListener(allowedConfig.listeners.end, handler);
+    } else {
+      this.$rep.removeEventListener(allowedConfig.listeners.end, handler);
     }
-
-    play(){
-        this.$rep.play();
+  }
+  onPlay(handler: () => void, set: boolean = true) {
+    if (set) {
+      this.$rep.addEventListener(allowedConfig.listeners.play, handler);
+    } else {
+      this.$rep.removeEventListener(allowedConfig.listeners.play, handler);
     }
-
-    pause(){
-        this.$rep.pause();
+  }
+  onPause(handler: () => void, set: boolean = true) {
+    if (set) {
+      this.$rep.addEventListener(allowedConfig.listeners.pause, handler);
+    } else {
+      this.$rep.removeEventListener(allowedConfig.listeners.pause, handler);
     }
-
-    stop(){
-        this.$rep.currentTime = 0;
-        this.pause();
+  }
+  onTimeUpdate(handler: () => void, set: boolean = true) {
+    if (set) {
+      this.$rep.addEventListener(allowedConfig.listeners.timeupdate, handler);
+    } else {
+      this.$rep.removeEventListener(
+        allowedConfig.listeners.timeupdate,
+        handler,
+      );
     }
-
-    setVolume(newVolume: number){
-        this.$rep.volume = newVolume;
-    }
-
-    isPlaying(){
-        return !this.$rep.paused
-    }
-
-    onEnd(handler: ()=> void, set:boolean = true){
-        if(set){
-            this.$rep.addEventListener(allowedConfig.listeners.end, handler);
-        }else{
-            this.$rep.removeEventListener(allowedConfig.listeners.end, handler);
-        }
-}
-    onPlay(handler: ()=> void, set:boolean = true){
-        if(set){
-            this.$rep.addEventListener(allowedConfig.listeners.play, handler);
-        }else{
-            this.$rep.removeEventListener(allowedConfig.listeners.play, handler);
-        }
-}
-    onPause(handler: ()=> void, set:boolean = true){
-        if(set){
-            this.$rep.addEventListener(allowedConfig.listeners.pause, handler);
-        }else{
-            this.$rep.removeEventListener(allowedConfig.listeners.pause, handler);
-        }
-}
-    onTimeUpdate(handler: ()=>void, set:boolean = true){
-        if(set){
-            this.$rep.addEventListener(allowedConfig.listeners.timeupdate, handler);
-        }else{
-            this.$rep.removeEventListener(allowedConfig.listeners.timeupdate, handler);
-        }
-}
+  }
 }

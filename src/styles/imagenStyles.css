@@ -1,35 +1,35 @@
 @keyframes pulsacion {
-    40% {
-        transform: scale(1);
-    }
+  40% {
+    transform: scale(1);
+  }
 
-    45% {
-        transform: scale(1.01);
-    }
+  45% {
+    transform: scale(1.01);
+  }
 
-    50% {
-        transform: scale(1);
-    }
+  50% {
+    transform: scale(1);
+  }
 
-    60% {
-        transform: scale(1.01);
-    }
+  60% {
+    transform: scale(1.01);
+  }
 
-    65% {
-        transform: scale(1);
-    }
+  65% {
+    transform: scale(1);
+  }
 }
 
 .invert-color {
-    filter: invert(100%);
-    animation: pulsacion 1.5s infinite;
+  filter: invert(100%);
+  animation: pulsacion 1.5s infinite;
 }
 
 .imagen {
-    background-image: url("/src/img/chappie.webp");
-    background-position-y: -10px;
-    background-size: 100%;
-    grid-area: image;
-    transition: filter .5s ease-in;
-    max-width: 300px;
+  background-image: url("/src/img/chappie.webp");
+  background-position-y: -10px;
+  background-size: 100%;
+  grid-area: image;
+  transition: filter 0.5s ease-in;
+  max-width: 300px;
 }

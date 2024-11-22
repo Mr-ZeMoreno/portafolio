@@ -4,11 +4,11 @@
   import { messageFormat } from "../js/consoleObject/consoleManager";
 
   document.addEventListener("DOMContentLoaded", () => {
-    const $inputElement = $("#input-msg") as HTMLInputElement;
-
-    $(".consola-box")?.addEventListener("click", () => {
-      $inputElement.focus();
-    });
+    const $inputElement = document.getElementById(
+      "input-msg",
+    ) as HTMLInputElement;
+    const consola = document.querySelector(".consola-box") as HTMLDivElement;
+    consola.addEventListener("click", () => $inputElement.focus());
 
     $("#input-form")?.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -41,7 +41,7 @@
 >
   <form id="input-form">
     <label>
-      <span class="green">></span>
+      <span class="green">{">"}</span>
       <input
         id="input-msg"
         type="text"

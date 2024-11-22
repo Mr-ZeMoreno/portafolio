@@ -10,12 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": [
-      "vite/client"
-    ]
+    "types": ["vite/client"]
   },
-  "include": [
-    "src/**/*",
-    "src/env.d.ts"
-  ]
+  "include": ["src/**/*", "src/env.d.ts"]
 }

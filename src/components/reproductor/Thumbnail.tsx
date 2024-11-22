@@ -1,6 +1,6 @@
 import "../../styles/imagenStyles.css";
 import { Volume } from "./Volume.tsx";
-import React from 'react';
+import React from "react";
 
 interface ThumbnailProps {
   audioRef: HTMLAudioElement;
@@ -11,11 +11,11 @@ interface ThumbnailProps {
   children: React.ReactNode;
 }
 
-const Thumbnail: React.FC<ThumbnailProps> = ({ 
-  audioRef, 
-  onClick, 
-  timer, 
-  children 
+const Thumbnail: React.FC<ThumbnailProps> = ({
+  audioRef,
+  onClick,
+  timer,
+  children,
 }) => {
   return (
     <>
@@ -26,7 +26,9 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
       >
         {children}
         <div className="ml-auto mr-[5px] flex items-center justify-between flex-col h-full pb-3">
-          <span id="timer" className="opacity-0 transition-all duration-200">{timer} s</span>
+          <span id="timer" className="opacity-0 transition-all duration-200">
+            {timer} s
+          </span>
         </div>
       </button>
       <Volume audioRef={audioRef} className="transition-all duration-200" />

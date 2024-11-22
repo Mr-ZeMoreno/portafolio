@@ -1,79 +1,85 @@
-import { useState, useRef, useEffect } from 'react';
-import Thumbnail from './Thumbnail.tsx';
-import { ConsoleManager, messageFormat } from '../../js/consoleObject/consoleManager.ts';
-import { Reproductor as Rep } from '../../js/consoleObject/Reproductor/Reproductor.ts';
-import data from "../../music.info.json"
+import { useState, useRef, useEffect } from "react";
+import Thumbnail from "./Thumbnail.tsx";
+import {
+  ConsoleManager,
+  messageFormat,
+} from "../../js/consoleObject/consoleManager.ts";
+import { Reproductor as Rep } from "../../js/consoleObject/Reproductor/Reproductor.ts";
+import data from "../../music.info.json";
 
 const Reproductor = ({ children }) => {
-    const [currentTime, setCurrentTime] = useState(0);
-    const audioRef = useRef(null);
-    const consoleElementRef = useRef(null);
-    const consoleRef = useRef(null);
-    const reproductorRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const audioRef = useRef(null);
+  const consoleElementRef = useRef(null);
+  const consoleRef = useRef(null);
+  const reproductorRef = useRef(null);
 
-    useEffect(() => {
-        consoleRef.current = new ConsoleManager();
-        consoleElementRef.current = consoleRef.current.getConsola();
-        reproductorRef.current = new Rep();
+  useEffect(() => {
+    consoleRef.current = new ConsoleManager();
+    consoleElementRef.current = consoleRef.current.getConsola();
+    reproductorRef.current = new Rep();
 
-        audioRef.current = reproductorRef.current.getRep();
+    audioRef.current = reproductorRef.current.getRep();
 
-        if (audioRef.current) {
-            reproductorRef.current.onTimeUpdate(handleTimeUpdate, true);
-            reproductorRef.current.onEnd(handleAudioEnd, true);
-        }
+    if (audioRef.current) {
+      reproductorRef.current.onTimeUpdate(handleTimeUpdate, true);
+      reproductorRef.current.onEnd(handleAudioEnd, true);
+    }
 
-        return () => {
-            if (audioRef.current) {
-                reproductorRef.current.onTimeUpdate(handleTimeUpdate, false);
-                reproductorRef.current.onEnd(handleAudioEnd, false);
-            }
-        };
-    }, []);
-
-    const handleThumbnailClick = () => {
-        if (reproductorRef.current) {
-            if (!reproductorRef.current.isPlaying()) {
-                consoleRef.current.play();
-            } else {
-                consoleRef.current.pause();
-            }
-        }
+    return () => {
+      if (audioRef.current) {
+        reproductorRef.current.onTimeUpdate(handleTimeUpdate, false);
+        reproductorRef.current.onEnd(handleAudioEnd, false);
+      }
     };
+  }, []);
 
-    const handleTimeUpdate = () => {
-        if (audioRef.current) {
-            setCurrentTime(audioRef.current.currentTime);
-        }
-    };
+  const handleThumbnailClick = () => {
+    if (reproductorRef.current) {
+      if (!reproductorRef.current.isPlaying()) {
+        consoleRef.current.play();
+      } else {
+        consoleRef.current.pause();
+      }
+    }
+  };
 
-    const handleAudioEnd = () => {
-        consoleRef.current.appendMessage("La canción ha terminado", messageFormat.middle);
-    };
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+    }
+  };
 
-    const AudioAttributes = data.AudioAttributes
-    return (
-        <>
-            <Thumbnail
-                onClick={handleThumbnailClick}
-                timer={currentTime.toFixed(0)}
-                audioRef={audioRef}
-            >
-                {children}
-            </Thumbnail>
-            {AudioAttributes.Url && (
-                <audio
-                    id="audio-rep"
-                    name={AudioAttributes.Name}
-                    autor={AudioAttributes.Autor}
-                    link={AudioAttributes.Link}
-                    src={AudioAttributes.Url}
-                    preload="auto"
-                    ref={(el) => (audioRef.current = el)}
-                />
-            )}
-        </>
+  const handleAudioEnd = () => {
+    consoleRef.current.appendMessage(
+      "La canción ha terminado",
+      messageFormat.middle,
     );
+  };
+
+  const AudioAttributes = data.AudioAttributes;
+  return (
+    <>
+      <Thumbnail
+        onClick={handleThumbnailClick}
+        timer={currentTime.toFixed(0)}
+        audioRef={audioRef}
+      >
+        {children}
+      </Thumbnail>
+      {AudioAttributes.Url && (
+        <audio
+          id="audio-rep"
+          name={AudioAttributes.Name}
+          autor={AudioAttributes.Autor}
+          link={AudioAttributes.Link}
+          src={AudioAttributes.Url}
+          preload="auto"
+          ref={(el) => (audioRef.current = el)}
+        />
+      )}
+    </>
+  );
 };
 
 export default Reproductor;

@@ -23,7 +23,7 @@ export default {
             "row-gap": "5px",
           },
         },
-        ["responsive"]
+        ["responsive"],
       );
     },
   ],
